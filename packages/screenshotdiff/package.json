@@ -8,6 +8,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "@octokit/rest": "19.0.4",
     "azure-devops-node-api": "^10.1.0",
     "lodash": "^4.17.21",
     "unzipper": "^0.10.5"

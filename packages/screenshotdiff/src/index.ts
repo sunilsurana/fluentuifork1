@@ -28,6 +28,13 @@ import {
   // ScreenshotArtifact,
 } from './midgardbot-core';
 import { CommitDetails } from './types';
+import { Octokit as gihubApi } from '@octokit/rest';
+import { getEnv } from './getEnv';
+// import { Octokit as gihubApi } from '@octokit/net';
+
+const octokit = new gihubApi({
+  auth: getEnv('GITHUB_API_TOKEN'),
+});
 
 console.log('Starting screenshot diff');
 
@@ -46,16 +53,32 @@ export async function runScreenshotDiffing(): Promise<void> {
   // 1a. Initialize relevant APIs for getting builds details
   console.log('Step 1a - Initialized APIs');
   try {
-    const apis = await getApis();
-    const lastMergeCommitDetails: CommitDetails = await getParentCommitFromMaster(270070, apis);
+    // const apis = await getApis();
 
-    console.log('Step 1a - Initialized APIs');
+    const f = await octokit.pulls.get({
+      owner: 'sunilsurana',
+      repo: 'fluentuifork1',
+      pull_number: 4,
+    });
 
-    // 1c. Find Commit Details for this PR Build
+    const testCommit = await octokit.git.getCommit({
+      owner: 'sunilsurana',
+      repo: 'fluentuifork1',
+      commit_sha: '0ce7f19cd978be278ce200ac937f207cb9051984',
+    });
 
-    console.log('Async function');
+    console.log(testCommit.data.parents);
 
-    const folders = await prepareFolders(false, 'pr', 270070);
+    // gihubApi;
+    // const lastMergeCommitDetails: CommitDetails = await getParentCommitFromMaster(270070, apis);
+
+    // console.log('Step 1a - Initialized APIs');
+
+    // // 1c. Find Commit Details for this PR Build
+
+    // console.log('Async function');
+
+    // const folders = await prepareFolders(false, 'pr', 270070);
 
     console.log('done!');
   } catch (diffError: any) {

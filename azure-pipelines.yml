@@ -70,5 +70,6 @@ jobs:
           API_TOKEN: $(TEST_PAT)
           API_REPOSITORY: $(Build.Repository.Name)
           API_PROJECT: $(System.TeamProject)
+          GITHUB_API_TOKEN: $(GITHUB_TEST_PAT)
 
       - template: .devops/templates/cleanup.yml
