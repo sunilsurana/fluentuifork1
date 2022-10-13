@@ -34,15 +34,17 @@ console.log('Starting screenshot diff');
 startDiffing();
 
 async function startDiffing(): Promise<void> {
+  console.log('test');
   await runScreenshotDiffing();
 }
 
 export async function runScreenshotDiffing(): Promise<void> {
-// buildId: number,
-// clientType: string,
-// pilot?: string,
-// lkgCIBuild?: number
+  // buildId: number,
+  // clientType: string,
+  // pilot?: string,
+  // lkgCIBuild?: number
   // 1a. Initialize relevant APIs for getting builds details
+  console.log('Step 1a - Initialized APIs');
   const apis = await getApis();
   console.log('Step 1a - Initialized APIs');
 
