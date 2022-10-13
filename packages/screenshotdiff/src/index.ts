@@ -47,19 +47,19 @@ export async function runScreenshotDiffing(): Promise<void> {
   console.log('Step 1a - Initialized APIs');
   try {
     const apis = await getApis();
+    const lastMergeCommitDetails: CommitDetails = await getParentCommitFromMaster(270070, apis);
+
+    console.log('Step 1a - Initialized APIs');
+
+    // 1c. Find Commit Details for this PR Build
+
+    console.log('Async function');
+
+    const folders = await prepareFolders(false, 'pr', 270070);
+
+    console.log('done!');
   } catch (diffError: any) {
     console.log(diffError);
     throw diffError;
   }
-
-  console.log('Step 1a - Initialized APIs');
-
-  // 1c. Find Commit Details for this PR Build
-  const lastMergeCommitDetails: CommitDetails = await getParentCommitFromMaster(270070, apis);
-
-  console.log('Async function');
-
-  const folders = await prepareFolders(false, 'pr', 270070);
-
-  console.log('done!');
 }
