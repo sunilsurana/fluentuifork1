@@ -26,6 +26,8 @@ export async function getParentCommitFromMaster(buildId: number, apis: Apis): Pr
     owner =
       build.requestedFor && build.requestedFor.uniqueName ? build.requestedFor.uniqueName.split('@')[0] : undefined;
     console.log('The PR ID: ', prId);
+    console.log('The repositoey ID: ', repository);
+    console.log('The project ID: ', project);
 
     if (prId) {
       const repo = await gitApi.getRepository(repository, project);
