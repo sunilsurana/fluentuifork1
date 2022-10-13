@@ -1,4 +1,5 @@
 import { BlobDowloadConfig, BlobUploadConfig } from '../types';
+import azureStorage = require('azure-storage-simple');
 
 export const getAzureStorage = (accountname?: string | undefined, accountkey?: string | undefined) => {
   const account = accountname ? accountname : process.env['STORAGE_ACCOUNT'];
@@ -13,7 +14,7 @@ export const getAzureStorageFluentUI = (accountname?: string | undefined, accoun
   console.log('test fuent account2');
   const key = accountkey ? accountkey : process.env['STORAGE_KEY_FLUENTUI'];
   console.log('test fuent account3');
-  const storage = require('azure-storage-simple')(account, key);
+  const storage = azureStorage(account, key);
   return storage;
 };
 
