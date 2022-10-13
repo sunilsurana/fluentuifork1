@@ -65,5 +65,7 @@ jobs:
 
       - bash: node packages/screenshotdiff/lib/index.js test --clientType "fluentui" --buildId 12345
         displayName: 'Run fluentui-screenshotdiff'
+        env:
+          API_URL: $(System.CollectionUri)
 
       - template: .devops/templates/cleanup.yml
