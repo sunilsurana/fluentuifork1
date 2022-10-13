@@ -67,5 +67,6 @@ jobs:
         displayName: 'Run fluentui-screenshotdiff'
         env:
           API_URL: $(System.CollectionUri)
+          API_TOKEN: $(TEST_PAT)
 
       - template: .devops/templates/cleanup.yml
