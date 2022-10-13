@@ -10,9 +10,10 @@
   "dependencies": {
     "@octokit/rest": "19.0.4",
     "azure-devops-node-api": "^10.1.0",
+    "azure-storage": "^2.10.3",
+    "azure-storage-simple": "1.0.0",
     "lodash": "^4.17.21",
-    "unzipper": "^0.10.5",
-    "azure-storage": "^2.10.3"
+    "unzipper": "^0.10.5"
   },
   "author": "",
   "license": "ISC",

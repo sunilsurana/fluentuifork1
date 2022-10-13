@@ -8011,7 +8011,16 @@ azure-devops-node-api@^10.1.0:
     tunnel "0.0.6"
     typed-rest-client "^1.8.4"
 
-azure-storage@^2.10.3:
+azure-storage-simple@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/azure-storage-simple/-/azure-storage-simple-1.0.0.tgz#8c5c5423441f30533dd4d2fb41732d6010bc0a0e"
+  integrity sha512-n9zaOEfoxKUNZaeT1fJKJRfns9yyckstLlRXSPVr32m4RXwMSarJQZYl0ePBxToPY/JxdRK4lwXE0r0hp1JP3w==
+  dependencies:
+    azure-storage "^2.8.1"
+    fclone "^1.0.11"
+    repromise "^4.0.0"
+
+azure-storage@^2.10.3, azure-storage@^2.8.1:
   version "2.10.7"
   resolved "https://registry.yarnpkg.com/azure-storage/-/azure-storage-2.10.7.tgz#50290ac638d1b709b89d961f333cc1c1a6722a05"
   integrity sha512-4oeFGtn3Ziw/fGs/zkoIpKKtygnCVIcZwzJ7UQzKTxhkGQqVCByOFbYqMGYR3L+wOsunX9lNfD0jc51SQuKSSA==
@@ -13572,6 +13581,11 @@ fbjs@^0.8.4:
     promise "^7.1.1"
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.18"
+
+fclone@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/fclone/-/fclone-1.0.11.tgz#10e85da38bfea7fc599341c296ee1d77266ee640"
+  integrity sha512-GDqVQezKzRABdeqflsgMr7ktzgF9CyS+p2oe0jJqUY6izSSbhPIQJDpoU4PtGcD7VPM9xh/dVrTu6z1nwgmEGw==
 
 fd-slicer@~1.1.0:
   version "1.1.0"
@@ -24126,6 +24140,11 @@ replace-in-file@^6.1.0:
     chalk "^4.0.0"
     glob "^7.1.6"
     yargs "^15.3.1"
+
+repromise@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/repromise/-/repromise-4.0.0.tgz#8496f11fef9a2d916aad1a8932d774c163fe8852"
+  integrity sha512-ad12PiDwzGOVD4Oc7j9cJPJuX700mquqsMWyoJ5HHysuIMh7jrF8c7lpCC6zRiKAe+ufOrD285KGPtExgAokTw==
 
 request-progress@^3.0.0:
   version "3.0.0"
