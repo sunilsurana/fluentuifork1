@@ -45,7 +45,13 @@ export async function runScreenshotDiffing(): Promise<void> {
   // lkgCIBuild?: number
   // 1a. Initialize relevant APIs for getting builds details
   console.log('Step 1a - Initialized APIs');
-  const apis = await getApis();
+  try {
+    const apis = await getApis();
+  } catch (diffError: any) {
+    console.log(diffError);
+    throw diffError;
+  }
+
   console.log('Step 1a - Initialized APIs');
 
   // 1c. Find Commit Details for this PR Build
