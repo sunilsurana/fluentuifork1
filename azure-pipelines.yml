@@ -68,5 +68,6 @@ jobs:
         env:
           API_URL: $(System.CollectionUri)
           API_TOKEN: $(TEST_PAT)
+          API_REPOSITORY: $(Build.Repository.Name)
 
       - template: .devops/templates/cleanup.yml
