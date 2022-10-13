@@ -8,8 +8,11 @@ export const getAzureStorage = (accountname?: string | undefined, accountkey?: s
 };
 
 export const getAzureStorageFluentUI = (accountname?: string | undefined, accountkey?: string | undefined) => {
+  console.log('test fuent account1');
   const account = accountname ? accountname : process.env['STORAGE_ACCOUNT_FLUENTUI'];
+  console.log('test fuent account2');
   const key = accountkey ? accountkey : process.env['STORAGE_KEY_FLUENTUI'];
+  console.log('test fuent account3');
   const storage = require('azure-storage-simple')(account, key);
   return storage;
 };

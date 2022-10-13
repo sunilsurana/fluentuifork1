@@ -261,6 +261,8 @@ export async function getArtifactsFromLocalFolderAndWriteToBlobStorage({
     );
 
     const storage = getAzureStorageFluentUI();
+
+    console.log('checkpoint 2');
     const blobService = storage.createBlobService().withFilter(new ExponentialRetryPolicyFilter());
     console.log('Initialized azure blob storage with account detail');
 
