@@ -27,9 +27,12 @@ import {
   // ReportDetail,
   // ScreenshotArtifact,
 } from './midgardbot-core';
-import { CommitDetails } from './types';
+import { BlobUploadConfig, CommitDetails, ScreenshotArtifact } from './types';
 import { Octokit as gihubApi } from '@octokit/rest';
 import { getEnv } from './getEnv';
+import { getDefaultBlobUploadConfig } from './azure-storage/azureStorageCommon';
+import { downloadBuildArtifact } from './azure-builddata/getBuildArtifact';
+
 // import { Octokit as gihubApi } from '@octokit/net';
 
 const octokit = new gihubApi({
@@ -55,19 +58,44 @@ export async function runScreenshotDiffing(): Promise<void> {
   try {
     // const apis = await getApis();
 
-    const f = await octokit.pulls.get({
-      owner: 'sunilsurana',
-      repo: 'fluentuifork1',
-      pull_number: 4,
-    });
+    // const f = await octokit.pulls.get({
+    //   owner: 'sunilsurana',
+    //   repo: 'fluentuifork1',
+    //   pull_number: 4,
+    // });
 
-    const testCommit = await octokit.git.getCommit({
-      owner: 'sunilsurana',
-      repo: 'fluentuifork1',
-      commit_sha: '0ce7f19cd978be278ce200ac937f207cb9051984',
-    });
+    // const testCommit = await octokit.git.getCommit({
+    //   owner: 'sunilsurana',
+    //   repo: 'fluentuifork1',
+    //   commit_sha: '0ce7f19cd978be278ce200ac937f207cb9051984',
+    // });
 
-    console.log(testCommit.data.parents);
+    // console.log(testCommit.data.parents);
+
+    // const folders = await prepareFolders(false, "PR", 123);
+
+    const { gitApi, buildApi } = await getApis();
+
+    const diffResultContainer = 'diff-screenshots';
+    const candidateContainer = 'candidate-screenshots';
+    const baselineContainer = 'diff-screenshots';
+    //3.d Upload candidate screenshots to Azure blob storage
+    // This is done to render the candidate images in the vr-approval app for thumbnails.
+    const blobUploadConfigCandidate: BlobUploadConfig = getDefaultBlobUploadConfig('', '', '');
+
+    // const ba=buildApi.getArtifact("uifabric", 1234, "" );
+    // ba.
+    const apis = await getApis();
+
+    const candiateDataFolder = 'candidate_folder';
+
+    try {
+      await downloadBuildArtifact(270339, ScreenshotArtifact, candiateDataFolder, apis);
+      console.log('Step 3a - Downloaded and Extracted candidate build artifacts');
+    } catch {
+      console.log('Step 3a - Error: Failed downloading/unzipping candidate build artifacts');
+      return;
+    }
 
     // gihubApi;
     // const lastMergeCommitDetails: CommitDetails = await getParentCommitFromMaster(270070, apis);

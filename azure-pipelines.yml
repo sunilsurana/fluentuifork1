@@ -71,5 +71,7 @@ jobs:
           API_REPOSITORY: $(Build.Repository.Name)
           API_PROJECT: $(System.TeamProject)
           GITHUB_API_TOKEN: $(GITHUB_TEST_PAT)
+          STORAGE_ACCOUNT_FLUENTUI: $(STORAGE-ACCOUNT-FLUENTUI)
+          STORAGE_KEY_FLUENTUI: $(STORAGE-KEY-BLOB-FLUENTUI)
 
       - template: .devops/templates/cleanup.yml

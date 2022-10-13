@@ -10,15 +10,15 @@
 //   getDefaultBlobUploadConfig,
 //   getAzureStorage,
 // } from "./azure-storage/azureStorageCommon";
-// export {
-//   BaselineTableName,
-//   BuildDetailRow,
-//   PrTableName,
-//   getOrCreateAzureTable,
-//   insertOrUpdateIntoAzureTable,
-//   findRowsByPartitionKey,
-//   findBuildStatusRowsByPartitionKey,
-// } from "./azure-storage/azureTableStorageManager";
+export {
+  BaselineTableName,
+  BuildDetailRow,
+  PrTableName,
+  getOrCreateAzureTable,
+  insertOrUpdateIntoAzureTable,
+  findRowsByPartitionKey,
+  findBuildStatusRowsByPartitionKey,
+} from './azure-storage/azureTableStorageManager';
 // export { listBlobs } from "./azure-storage/listBlobs";
 // export {
 //   isBuildForPrExist,
@@ -49,19 +49,19 @@
 //   getOwnerAliasOfBuild,
 // } from "./azure-builddata/getBuildArtifact";
 // export { downloadAdoDropToDestination } from "./azure-builddata/getAdoDrop";
-// export {
-//   CommitDetails,
-//   ScreenshotArtifact,
-//   BundleStatsArtifact,
-//   BaselineScreenshotContainer,
-//   BaselineScreenshotContainer1JS,
-//   BaselineScreenshotv2Container,
-//   BaselineBundleStatContainer,
-//   BlobUploadConfig,
-//   BlobDowloadConfig,
-//   BundleStatDetails,
-//   ReportDetail,
-// } from "./types";
+export {
+  CommitDetails,
+  ScreenshotArtifact,
+  BundleStatsArtifact,
+  BaselineScreenshotContainer,
+  BaselineScreenshotContainer1JS,
+  BaselineScreenshotv2Container,
+  BaselineBundleStatContainer,
+  BlobUploadConfig,
+  BlobDowloadConfig,
+  BundleStatDetails,
+  ReportDetail,
+} from './types';
 // // export { getClientTypeFromContext, getBooleanParameterFromContext } from './getBuildIdFromContext';
 // export { measure, stopMeasureFor, startMeasurements } from "./measure";
 export { getApis, Apis } from './azure-builddata/getApi';
