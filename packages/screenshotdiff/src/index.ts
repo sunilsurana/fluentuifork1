@@ -28,7 +28,7 @@ import {
   // ScreenshotArtifact,
 } from './midgardbot-core';
 import { BlobUploadConfig, CommitDetails, ScreenshotArtifact } from './types';
-import { Octokit as gihubApi } from '@octokit/rest';
+// import { Octokit as gihubApi } from '@octokit/rest';
 import { getEnv } from './getEnv';
 import { getDefaultBlobUploadConfig } from './azure-storage/azureStorageCommon';
 import { downloadBuildArtifact } from './azure-builddata/getBuildArtifact';
@@ -36,9 +36,9 @@ import { getArtifactsFromLocalFolderAndWriteToBlobStorage } from './azure-storag
 
 // import { Octokit as gihubApi } from '@octokit/net';
 
-const octokit = new gihubApi({
-  auth: getEnv('GITHUB_API_TOKEN'),
-});
+// const octokit = new gihubApi({
+//   auth: getEnv('GITHUB_API_TOKEN'),
+// });
 
 console.log('Starting screenshot diff');
 
