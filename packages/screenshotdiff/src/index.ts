@@ -90,7 +90,7 @@ export async function runScreenshotDiffing(): Promise<void> {
     const candiateDataFolder = 'candidate_folder';
 
     try {
-      await downloadBuildArtifact(270339, ScreenshotArtifact, candiateDataFolder, apis);
+      await downloadBuildArtifact(270339, 'vrscreenshot', candiateDataFolder, apis);
       console.log('Step 3a - Downloaded and Extracted candidate build artifacts');
     } catch {
       console.log('Step 3a - Error: Failed downloading/unzipping candidate build artifacts');
