@@ -32,6 +32,7 @@ import { Octokit as gihubApi } from '@octokit/rest';
 import { getEnv } from './getEnv';
 import { getDefaultBlobUploadConfig } from './azure-storage/azureStorageCommon';
 import { downloadBuildArtifact } from './azure-builddata/getBuildArtifact';
+import { getArtifactsFromLocalFolderAndWriteToBlobStorage } from './azure-storage/getArtifactsFromBlobStorageAndWriteToLocalFolder';
 
 // import { Octokit as gihubApi } from '@octokit/net';
 
@@ -81,7 +82,7 @@ export async function runScreenshotDiffing(): Promise<void> {
     const baselineContainer = 'diff-screenshots';
     //3.d Upload candidate screenshots to Azure blob storage
     // This is done to render the candidate images in the vr-approval app for thumbnails.
-    const blobUploadConfigCandidate: BlobUploadConfig = getDefaultBlobUploadConfig('', '', '');
+    // const blobUploadConfigCandidate: BlobUploadConfig = getDefaultBlobUploadConfig('', '', '');
 
     // const ba=buildApi.getArtifact("uifabric", 1234, "" );
     // ba.
@@ -96,6 +97,25 @@ export async function runScreenshotDiffing(): Promise<void> {
       console.log('Step 3a - Error: Failed downloading/unzipping candidate build artifacts');
       return;
     }
+
+    // const candidateBlobPrefix =
+    //   `${candidateFolderPath}/${ScreenshotArtifact}`;
+
+    //3.d Upload candidate screenshots to Azure blob storage
+    // This is done to render the candidate images in the vr-approval app for thumbnails.
+    const blobUploadConfigCandidate: BlobUploadConfig = getDefaultBlobUploadConfig(
+      candidateContainer,
+      'testClient/artifact',
+      'candidate-folder',
+    );
+
+    blobUploadConfigCandidate.generateSasToken = false;
+    blobUploadConfigCandidate.isGzip = false; // We don't compress/gzip screenshots
+    const uploadedCandidateScreenshots = await getArtifactsFromLocalFolderAndWriteToBlobStorage(
+      blobUploadConfigCandidate,
+    );
+
+    console.log(uploadedCandidateScreenshots);
 
     // gihubApi;
     // const lastMergeCommitDetails: CommitDetails = await getParentCommitFromMaster(270070, apis);
