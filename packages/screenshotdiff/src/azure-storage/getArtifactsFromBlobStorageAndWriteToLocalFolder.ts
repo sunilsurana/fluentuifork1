@@ -288,22 +288,79 @@ export async function getArtifactsFromLocalFolderAndWriteToBlobStorage({
   console.log('Completed getArtifactsFromLocalFolderAndWriteToBlobStorage for folder: ' + localFolder);
 }
 
-// const uploadFileToBlob = async (containerName, localFilePath): Promise<string[]> => {
-//   // if (!file) return [];
+export async function getArtifactsFromBlobStorageAndWriteToLocalFolderNew({
+  localFolderPath,
+  container,
+  blobFilePrefix,
+  // generateSasToken = false,
+  // isGzip = false,
+  includeSubFolders = false,
+  retriesLeft = 3,
+}): Promise<void> {
+  // try {
+  console.log('Started getArtifactsFromBlobStorageAndWriteToLocalFolderNew for folder: ' + localFolderPath);
 
-//   console.log('checkpoiint');
-//   const blobService = BlobServiceClient.fromConnectionString(
-//     'DefaultEndpointsProtocol=https;AccountName=vrtfluentsa;AccountKey=OaFD93FUUHLDtVmJCQ87dxcTUGGUhQWG3hG4cf7OnMMG83AUTgyIoTzXRaxIMSDs0D+xd/vDU3bH+AStKOsUGg==;EndpointSuffix=core.windows.net',
-//   );
+  // console.log('checkpoint 2');
+  // const blobService = ''; // storage.createBlobService().withFilter(new ExponentialRetryPolicyFilter());
+  // console.log('Initialized azure blob storage with account detail');
+  // isGzip = true;
+  // const filesWithContent = getFileDetailsFromFolder(localFolder, 'png', true);
 
-//   // blobService.generateAccountSasUrl()
-//   // get Container - full public read access
-//   const containerClient = blobService.getContainerClient(containerName);
+  // console.log('files with content are: ');
+  // console.log(filesWithContent);
 
-//   // upload file
-//   await uploadBlobInContainer(containerClient, localFilePath);
-//   return null;
-// };
+  console.log('checkpoiint test');
+  const blobService = BlobServiceClient.fromConnectionString('key');
+
+  const containerClient = blobService.getContainerClient(container);
+
+  await createFolderInApp('baseline_folder/vrscreenshot');
+
+  listBlobHierarchical(containerClient, localFolderPath);
+}
+
+// Recursively list virtual folders and blobs
+
+// Recursively list virtual folders and blobs
+async function listBlobHierarchical(containerClient, virtualHierarchyDelimiter = '/') {
+  // page size - artificially low as example
+  const maxPageSize = 100;
+
+  // some options for filtering list
+  const listOptions = {
+    includeMetadata: true,
+    includeSnapshots: false,
+    includeTags: true,
+    includeVersions: false,
+    prefix: '',
+  };
+
+  let i = 1;
+  console.log(`Folder ${virtualHierarchyDelimiter}`);
+
+  for await (const response of containerClient
+    .listBlobsByHierarchy(virtualHierarchyDelimiter, listOptions)
+    .byPage({ maxPageSize })) {
+    console.log(`   Page ${i++}`);
+    const segment = response.segment;
+
+    if (segment.blobPrefixes) {
+      // Do something with each virtual folder
+      for await (const prefix of segment.blobPrefixes) {
+        // build new virtualHierarchyDelimiter from current and next
+        await listBlobHierarchical(containerClient, `${virtualHierarchyDelimiter}${prefix.name}`);
+      }
+    }
+
+    for (const blob of response.segment.blobItems) {
+      // Do something with each blob
+      console.log(`\tBlobItem: name - ${blob.name}`);
+      const blobClient = await containerClient.getBlobClient(blob.name);
+      await blobClient.downloadToFile(blob.name);
+      console.log(`download of ${blob.name} success`);
+    }
+  }
+}
 
 const uploadBlobInContainer = async (containerClient, file) => {
   console.log('vrscreenshot is: ');
@@ -313,20 +370,6 @@ const uploadBlobInContainer = async (containerClient, file) => {
   await blobClient.uploadFile(file, {});
   console.log('upload to blob:- ' + file);
 };
-
-// async function writeArtifactsToBlobNew(
-//   blobFilePrefix: string,
-//   container: string,
-//   filePath: string,
-// ): Promise<[string, string]> {
-//   return new Promise((resolve, reject) => {
-//     // const blobFileLocation = path.join(blobFilePrefix, filePath);
-//     // console.log('file location is');
-//     // console.log(blobFileLocation);
-//     // const blockSize = 1024 * 1024 * 4;
-//     uploadBlobInContainer(container, filePath);
-//   });
-// }
 
 async function writeArtifactsToBlob(
   blobFilePrefix: string,

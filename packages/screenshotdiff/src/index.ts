@@ -32,7 +32,10 @@ import { BlobUploadConfig, CommitDetails, ScreenshotArtifact } from './types';
 import { getEnv } from './getEnv';
 import { getDefaultBlobUploadConfig } from './azure-storage/azureStorageCommon';
 import { downloadBuildArtifact } from './azure-builddata/getBuildArtifact';
-import { getArtifactsFromLocalFolderAndWriteToBlobStorage } from './azure-storage/getArtifactsFromBlobStorageAndWriteToLocalFolder';
+import {
+  getArtifactsFromBlobStorageAndWriteToLocalFolderNew,
+  getArtifactsFromLocalFolderAndWriteToBlobStorage,
+} from './azure-storage/getArtifactsFromBlobStorageAndWriteToLocalFolder';
 
 // import { Octokit as gihubApi } from '@octokit/net';
 
@@ -103,19 +106,25 @@ export async function runScreenshotDiffing(): Promise<void> {
 
     //3.d Upload candidate screenshots to Azure blob storage
     // This is done to render the candidate images in the vr-approval app for thumbnails.
-    const blobUploadConfigCandidate: BlobUploadConfig = getDefaultBlobUploadConfig(
-      candidateContainer,
-      'testClient/artifact',
-      'candidate-folder',
-    );
+    // const blobUploadConfigCandidate: BlobUploadConfig = getDefaultBlobUploadConfig(
+    //   candidateContainer,
+    //   'testClient/artifact',
+    //   'candidate-folder',
+    // );
 
-    // blobUploadConfigCandidate.generateSasToken = false;
-    // blobUploadConfigCandidate.isGzip = false; // We don't compress/gzip screenshots
-    const uploadedCandidateScreenshots = await getArtifactsFromLocalFolderAndWriteToBlobStorage(
-      blobUploadConfigCandidate,
-    );
+    // // blobUploadConfigCandidate.generateSasToken = false;
+    // // blobUploadConfigCandidate.isGzip = false; // We don't compress/gzip screenshots
+    // const uploadedCandidateScreenshots = await getArtifactsFromLocalFolderAndWriteToBlobStorage(
+    //   blobUploadConfigCandidate,
+    // );
 
-    console.log(uploadedCandidateScreenshots);
+    getArtifactsFromBlobStorageAndWriteToLocalFolderNew({
+      localFolderPath: 'baseline_folder',
+      container: 'baseline-screenshots',
+      blobFilePrefix: '/baseline_folder',
+    });
+
+    // console.log(uploadedCandidateScreenshots);
 
     // gihubApi;
     // const lastMergeCommitDetails: CommitDetails = await getParentCommitFromMaster(270070, apis);
