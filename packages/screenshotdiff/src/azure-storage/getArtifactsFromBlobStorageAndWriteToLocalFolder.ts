@@ -4,6 +4,7 @@ import { createFolderInApp, getFileDetailsFromFolder, normalizeFolderPath } from
 import { getAzureStorageFluentUI } from './azureStorageCommon';
 import { listBlobDirectories, listBlobs } from './listBlobs';
 import { writeArtifactsToLocalFolder } from './writeArtifactsToLocalFolder';
+import { BlobServiceClient, ContainerClient } from '@azure/storage-blob';
 
 export async function getArtifactsFromBlobStorageAndWriteToLocalFolder({
   container,
@@ -36,6 +37,11 @@ export async function getArtifactsFromBlobStorageAndWriteToLocalFolder({
   console.log('Initialized azure blob storage with account details');
 
   const blobItems = await listBlobs(blobService, container, blobPrefix);
+
+  // const blobServiceClient = BlobServiceClient.fromConnectionString("");
+  // const containerClient = blobServiceClient.getContainerClient("$web");
+  // const blobClient=containerClient.getBlobClient("blobName");
+  // blobClient.
 
   if (createFolder) {
     await createFolderInApp(folder);
@@ -245,69 +251,82 @@ export async function getArtifactsFromLocalFolderAndWriteToBlobStorage({
   localFolder,
   container,
   blobFilePrefix,
-  generateSasToken = false,
-  isGzip = false,
+  // generateSasToken = false,
+  // isGzip = false,
   includeSubFolders = false,
   retriesLeft = 3,
-}): Promise<Map<string, string>> {
-  try {
-    console.log(
-      'Started getArtifactsFromLocalFolderAndWriteToBlobStorage for folder: ' +
-        localFolder +
-        ' IsGzip: ' +
-        isGzip +
-        ' includeSubFolders: ' +
-        includeSubFolders,
-    );
+}): Promise<void> {
+  // try {
+  console.log('Started getArtifactsFromLocalFolderAndWriteToBlobStorage for folder: ' + localFolder);
 
-    const storage = getAzureStorageFluentUI();
+  console.log('checkpoint 2');
+  // const blobService = ''; // storage.createBlobService().withFilter(new ExponentialRetryPolicyFilter());
+  console.log('Initialized azure blob storage with account detail');
+  // isGzip = true;
+  const filesWithContent = getFileDetailsFromFolder(localFolder, 'png', true);
 
-    console.log('checkpoint 2');
-    const blobService = storage.createBlobService().withFilter(new ExponentialRetryPolicyFilter());
-    console.log('Initialized azure blob storage with account detail');
+  console.log('files with content are: ');
+  console.log(filesWithContent);
 
-    const filesWithContent = getFileDetailsFromFolder(
-      localFolder,
-      isGzip ? 'json' : '@(png|html|txt)', // We gzip the bundlestats only not screenshots, and need to check if we
-      includeSubFolders,
-    );
+  console.log('checkpoiint');
+  const blobService = BlobServiceClient.fromConnectionString(
+    'DefaultEndpointsProtocol=https;AccountName=vrtfluentsa;AccountKey=OaFD93FUUHLDtVmJCQ87dxcTUGGUhQWG3hG4cf7OnMMG83AUTgyIoTzXRaxIMSDs0D+xd/vDU3bH+AStKOsUGg==;EndpointSuffix=core.windows.net',
+  );
 
-    const allFiles = await Promise.all(
-      filesWithContent.map(({ filename, filepath }) => {
-        const subfolder = filepath.replace(normalizeFolderPath(localFolder), '').replace(filename, '');
-        return writeArtifactsToBlob(
-          blobFilePrefix,
-          container,
-          blobService,
-          filename,
-          filepath,
-          generateSasToken,
-          isGzip,
-          includeSubFolders ? subfolder : '',
-        );
-      }),
-    );
+  const containerClient = blobService.getContainerClient(container);
 
-    console.log('Completed getArtifactsFromLocalFolderAndWriteToBlobStorage for folder: ' + localFolder);
-    return new Map(allFiles);
-  } catch (writetoBlobError: any) {
-    const errorMessage = `Error getArtifactsFromLocalFolderAndWriteToBlobStorage #${retriesLeft} retries left: ${writetoBlobError}`;
-    console.log(errorMessage);
-    if (retriesLeft > 0) {
-      return getArtifactsFromLocalFolderAndWriteToBlobStorage({
-        localFolder,
-        container,
-        blobFilePrefix,
-        generateSasToken,
-        isGzip,
-        includeSubFolders,
-        retriesLeft: retriesLeft - 1,
-      });
-    } else {
-      throw new Error(errorMessage);
-    }
-  }
+  await Promise.all(
+    filesWithContent.map(({ filename, filepath }) => {
+      console.log(filename);
+      console.log(filepath);
+
+      // upload file
+      uploadBlobInContainer(containerClient, filepath);
+    }),
+  );
+
+  console.log('Completed getArtifactsFromLocalFolderAndWriteToBlobStorage for folder: ' + localFolder);
 }
+
+// const uploadFileToBlob = async (containerName, localFilePath): Promise<string[]> => {
+//   // if (!file) return [];
+
+//   console.log('checkpoiint');
+//   const blobService = BlobServiceClient.fromConnectionString(
+//     'DefaultEndpointsProtocol=https;AccountName=vrtfluentsa;AccountKey=OaFD93FUUHLDtVmJCQ87dxcTUGGUhQWG3hG4cf7OnMMG83AUTgyIoTzXRaxIMSDs0D+xd/vDU3bH+AStKOsUGg==;EndpointSuffix=core.windows.net',
+//   );
+
+//   // blobService.generateAccountSasUrl()
+//   // get Container - full public read access
+//   const containerClient = blobService.getContainerClient(containerName);
+
+//   // upload file
+//   await uploadBlobInContainer(containerClient, localFilePath);
+//   return null;
+// };
+
+const uploadBlobInContainer = async (containerClient, file) => {
+  console.log('vrscreenshot is: ');
+  console.log(file);
+
+  const blobClient = containerClient.getBlockBlobClient(file);
+  await blobClient.uploadFile(file, {});
+  console.log('upload to blob:- ' + file);
+};
+
+// async function writeArtifactsToBlobNew(
+//   blobFilePrefix: string,
+//   container: string,
+//   filePath: string,
+// ): Promise<[string, string]> {
+//   return new Promise((resolve, reject) => {
+//     // const blobFileLocation = path.join(blobFilePrefix, filePath);
+//     // console.log('file location is');
+//     // console.log(blobFileLocation);
+//     // const blockSize = 1024 * 1024 * 4;
+//     uploadBlobInContainer(container, filePath);
+//   });
+// }
 
 async function writeArtifactsToBlob(
   blobFilePrefix: string,

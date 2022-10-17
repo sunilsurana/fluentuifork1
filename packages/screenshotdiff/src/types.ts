@@ -35,8 +35,8 @@ export type BlobUploadConfig = {
   container: string;
   blobFilePrefix: string;
   localFolder: string;
-  generateSasToken: boolean;
-  isGzip: boolean;
+  // generateSasToken: boolean;
+  // isGzip: boolean;
   includeSubFolders: boolean;
 };
 

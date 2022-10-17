@@ -13,7 +13,9 @@ export const getAzureStorageFluentUI = (accountname?: string | undefined, accoun
   console.log('test fuent account2');
   const key = accountkey ? accountkey : process.env['STORAGE_KEY_FLUENTUI'];
   console.log('test fuent account1');
+  // createStorageSimple.
   const storage = require('azure-storage-simple')(account, key);
+  console.log('test fuent account999');
   return storage;
 };
 

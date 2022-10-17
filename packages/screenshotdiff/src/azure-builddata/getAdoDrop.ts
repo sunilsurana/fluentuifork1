@@ -7,7 +7,7 @@ import { performance } from 'perf_hooks';
 import { getAuthHeader, getWebApi } from './getApi';
 import { execFileSync } from 'child_process';
 
-const ORG_NAME = 'office';
+const ORG_NAME = 'uifabric';
 const DROP_SERVICE_URL = `https://artifacts.dev.azure.com/${ORG_NAME}`;
 
 const MAX_CONCURRENCY_DOWNLOAD = 50;

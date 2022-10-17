@@ -54,7 +54,7 @@ export async function getParentCommitFromMaster(buildId: number, apis: Apis): Pr
         pull_number: prId,
       });
 
-      console.log('ownwer : ', prDetails.data.user.login);
+      // console.log('ownwer : ', prDetails.data.user.login);
 
       // prOwner = prDetails.createdBy?.uniqueName;
       pullRequestName = prDetails.data.title;

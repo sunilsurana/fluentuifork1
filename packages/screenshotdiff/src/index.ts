@@ -75,21 +75,21 @@ export async function runScreenshotDiffing(): Promise<void> {
 
     // const folders = await prepareFolders(false, "PR", 123);
 
-    const { gitApi, buildApi } = await getApis();
+    // const { gitApi, buildApi } = await getApis();
 
-    const diffResultContainer = 'diff-screenshots';
+    // const diffResultContainer = 'diff-screenshots';
     const candidateContainer = 'candidate-screenshots';
-    const baselineContainer = 'diff-screenshots';
-    //3.d Upload candidate screenshots to Azure blob storage
-    // This is done to render the candidate images in the vr-approval app for thumbnails.
-    // const blobUploadConfigCandidate: BlobUploadConfig = getDefaultBlobUploadConfig('', '', '');
+    // const baselineContainer = 'diff-screenshots';
+    // //3.d Upload candidate screenshots to Azure blob storage
+    // // This is done to render the candidate images in the vr-approval app for thumbnails.
+    // // const blobUploadConfigCandidate: BlobUploadConfig = getDefaultBlobUploadConfig('', '', '');
 
-    // const ba=buildApi.getArtifact("uifabric", 1234, "" );
-    // ba.
+    // // const ba=buildApi.getArtifact("uifabric", 1234, "" );
+    // // ba.
     const apis = await getApis();
-
+    console.log('Step 1a - Initialized APIs 2');
     const candiateDataFolder = 'candidate_folder';
-
+    console.log('Step 1a - Initialized APIs 3');
     try {
       await downloadBuildArtifact(270339, 'vrscreenshot', candiateDataFolder, apis);
       console.log('Step 3a - Downloaded and Extracted candidate build artifacts');
@@ -109,8 +109,8 @@ export async function runScreenshotDiffing(): Promise<void> {
       'candidate-folder',
     );
 
-    blobUploadConfigCandidate.generateSasToken = false;
-    blobUploadConfigCandidate.isGzip = false; // We don't compress/gzip screenshots
+    // blobUploadConfigCandidate.generateSasToken = false;
+    // blobUploadConfigCandidate.isGzip = false; // We don't compress/gzip screenshots
     const uploadedCandidateScreenshots = await getArtifactsFromLocalFolderAndWriteToBlobStorage(
       blobUploadConfigCandidate,
     );

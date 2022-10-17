@@ -53,7 +53,7 @@ export async function prepareFolders(
 /* Find filenames and full path of the files from current folder and subfolders Using glob */
 export function getFileDetailsFromFolder(
   dirname: string,
-  fileExtension: string = 'json',
+  fileExtension: string = 'png',
   includeSubFolders: boolean = false,
 ): { filename: string; filepath: string }[] {
   const globForFiles = includeSubFolders ? `${dirname}/**/*.${fileExtension}` : `${dirname}/*.${fileExtension}`;

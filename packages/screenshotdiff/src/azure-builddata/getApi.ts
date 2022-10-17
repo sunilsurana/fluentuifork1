@@ -38,14 +38,17 @@ export type Apis = {
 };
 
 export async function getApis(): Promise<Apis> {
+  console.log('test getAPI1');
   const initApisMeasure = measure('Initializing Apis');
 
-  const webApiMeasure = measure('Init Web Api');
+  // const webApiMeasure = measure('Init Web Api');
   const webApi = await getWebApi();
-  webApiMeasure.stop();
+  // webApiMeasure.stop();
+  console.log('test getAPI2');
 
   const gitApiMeasure = measure('Init Git Api');
   const buildApiMeasure = measure('Init Build Api');
+  console.log('test getAPI');
   const [gitApi, buildApi] = await Promise.all([
     webApi.getGitApi().then(gitApi => {
       gitApiMeasure.stop();
