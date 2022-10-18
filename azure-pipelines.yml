@@ -31,7 +31,7 @@ jobs:
         displayName: Build vr tests components package
 
       - script: |
-          yarn lage test:component --verbose
+          yarn lage test:component --verbose    
         displayName: 'Run VR tests'
         
       - script: |
