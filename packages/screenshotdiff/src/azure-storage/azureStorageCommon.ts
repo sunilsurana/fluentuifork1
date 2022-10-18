@@ -47,8 +47,9 @@ export function getDefaultBlobUploadConfig(
     container: containername,
     blobFilePrefix: blobprefix,
     localFolder: localfolder,
-    generateSasToken: false,
-    isGzip: false,
+    fileExtension: 'png',
+    // generateSasToken: false,
+    // isGzip: false,
     includeSubFolders: false,
   };
   return config;

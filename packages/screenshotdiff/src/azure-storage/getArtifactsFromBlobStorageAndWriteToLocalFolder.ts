@@ -5,6 +5,7 @@ import { getAzureStorageFluentUI } from './azureStorageCommon';
 import { listBlobDirectories, listBlobs } from './listBlobs';
 import { writeArtifactsToLocalFolder } from './writeArtifactsToLocalFolder';
 import { BlobServiceClient, ContainerClient } from '@azure/storage-blob';
+import { getEnv } from '../getEnv';
 
 export async function getArtifactsFromBlobStorageAndWriteToLocalFolder({
   container,
@@ -250,6 +251,7 @@ export const deleteArtifactsFromBlobStorage = async (
 export async function getArtifactsFromLocalFolderAndWriteToBlobStorage({
   localFolder,
   container,
+  fileExtension,
   blobFilePrefix,
   // generateSasToken = false,
   // isGzip = false,
@@ -263,15 +265,13 @@ export async function getArtifactsFromLocalFolderAndWriteToBlobStorage({
   // const blobService = ''; // storage.createBlobService().withFilter(new ExponentialRetryPolicyFilter());
   console.log('Initialized azure blob storage with account detail');
   // isGzip = true;
-  const filesWithContent = getFileDetailsFromFolder(localFolder, 'png', true);
+  const filesWithContent = getFileDetailsFromFolder(localFolder, fileExtension, true);
 
   console.log('files with content are: ');
   console.log(filesWithContent);
 
   console.log('checkpoiint');
-  const blobService = BlobServiceClient.fromConnectionString(
-    'DefaultEndpointsProtocol=https;AccountName=vrtfluentsa;AccountKey=OaFD93FUUHLDtVmJCQ87dxcTUGGUhQWG3hG4cf7OnMMG83AUTgyIoTzXRaxIMSDs0D+xd/vDU3bH+AStKOsUGg==;EndpointSuffix=core.windows.net',
-  );
+  const blobService = BlobServiceClient.fromConnectionString(getEnv('BLOB_CONNECTION_STRING'));
 
   const containerClient = blobService.getContainerClient(container);
 
@@ -310,13 +310,13 @@ export async function getArtifactsFromBlobStorageAndWriteToLocalFolderNew({
   // console.log(filesWithContent);
 
   console.log('checkpoiint test');
-  const blobService = BlobServiceClient.fromConnectionString('key');
+  const blobService = BlobServiceClient.fromConnectionString(getEnv('BLOB_CONNECTION_STRING'));
 
   const containerClient = blobService.getContainerClient(container);
 
   await createFolderInApp('baseline_folder/vrscreenshot');
 
-  listBlobHierarchical(containerClient, localFolderPath);
+  await listBlobHierarchical(containerClient, localFolderPath);
 }
 
 // Recursively list virtual folders and blobs

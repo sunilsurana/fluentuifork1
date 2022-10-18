@@ -38,6 +38,7 @@ export type BlobUploadConfig = {
   // generateSasToken: boolean;
   // isGzip: boolean;
   includeSubFolders: boolean;
+  fileExtension: string;
 };
 
 export type BundleStatDetails = {

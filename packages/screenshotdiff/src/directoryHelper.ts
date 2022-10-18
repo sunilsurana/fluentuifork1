@@ -90,22 +90,29 @@ function cleanupDirectory(folder: string): Promise<void> {
 
 export const normalizeFolderPath = (folderPath: string) => folderPath.split(path.sep).join('/');
 
-export function flattenDirectory(folder: string, separator: string): string {
-  const flattenedFolder = path.join(folder, 'flattened');
+export async function flattenDirectory(folder: string, separator: string): Promise<string> {
+  const flattenedFolder = path.posix.join(folder, 'flattened');
 
   if (!fs.existsSync(flattenedFolder)) {
     console.log(`'${flattenedFolder}' doesn't exist, creating`);
-    fs.mkdirSync(flattenedFolder);
+    // fs.mkdirSync(flattenedFolder);
+    await fs.promises.mkdir(flattenedFolder, { recursive: true });
+    console.log(`'${flattenedFolder}' doesn't exist, created`);
+  } else {
+    console.log(`Flatten folder exists`);
   }
 
   glob.sync(`${folder}/**/*.*`).forEach(file => {
+    console.log('folder is :' + folder);
+
+    console.log('file is :' + file);
     const flattenedFileName = file
       .replace(normalizeFolderPath(folder), '')
       .split('/')
       .filter(part => part !== '')
       .join(separator);
 
-    fs.copyFileSync(file, path.join(flattenedFolder, flattenedFileName));
+    fs.promises.copyFile(file, path.join(flattenedFolder, flattenedFileName));
   });
 
   return flattenedFolder;

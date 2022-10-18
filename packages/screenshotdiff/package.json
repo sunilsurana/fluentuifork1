@@ -9,12 +9,14 @@
     "build": "tsc"
   },
   "dependencies": {
+    "pixel-buffer-diff-folders": "^1.1.2",
     "@octokit/rest": "19.0.4",
     "azure-devops-node-api": "^10.1.0",
     "azure-storage": "^2.10.3",
     "azure-storage-simple": "1.0.0",
     "lodash": "^4.17.21",
-    "unzipper": "^0.10.5"
+    "unzipper": "^0.10.5",
+    "adal-node": "^0.2.3"
   },
   "author": "",
   "license": "ISC",
