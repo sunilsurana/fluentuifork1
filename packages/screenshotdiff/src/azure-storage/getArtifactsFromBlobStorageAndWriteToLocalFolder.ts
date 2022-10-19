@@ -291,7 +291,7 @@ export async function getArtifactsFromLocalFolderAndWriteToBlobStorage({
 export async function getArtifactsFromBlobStorageAndWriteToLocalFolderNew({
   localFolderPath,
   container,
-  blobFilePrefix,
+  blobFilePrefix = '',
   // generateSasToken = false,
   // isGzip = false,
   includeSubFolders = false,

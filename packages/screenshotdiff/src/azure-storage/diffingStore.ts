@@ -4,7 +4,7 @@ import {
   findRowsByPartitionKey,
   getOrCreateAzureTable,
   insertOrUpdateIntoAzureTable,
-} from '../midgardbot-core';
+} from '../package-core';
 import { BuildDetailRow, findBuildStatusRowsByPartitionKey, PrTableName } from './azureTableStorageManager';
 
 export const insertCommitDetailsInBaselineTable = async (

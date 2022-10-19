@@ -3,7 +3,7 @@ import { flattenDirectory, prepareFolders } from './directoryHelper';
 import { getfirstCommitOfLGCI, getParentCommitFromMaster } from './azure-builddata/getParentCommitFromMaster';
 import { diffFolders } from 'pixel-buffer-diff-folders';
 import * as fs from 'fs';
-import { getApis } from './midgardbot-core';
+import { getApis } from './package-core';
 import { BlobUploadConfig, CommitDetails, ReportDetail, ScreenshotArtifact } from './types';
 import { Octokit as gihubApi } from '@octokit/rest';
 import { getEnv } from './getEnv';
@@ -86,6 +86,8 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
 
     const baselineCommitId = await getfirstCommitOfLGCI(lkgCIBuild, apis);
 
+    var baselineFolder = 'baseline-' + baselineCommitId;
+
     console.log('baseline commit Id is :' + baselineCommitId);
 
     const { buildApi } = apis;
@@ -123,9 +125,9 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
     );
 
     await getArtifactsFromBlobStorageAndWriteToLocalFolderNew({
-      localFolderPath: 'baseline_folder',
+      localFolderPath: baselineFolder,
       container: baselineContainer,
-      blobFilePrefix: '/baseline_folder',
+      // blobFilePrefix: '/baseline_folder',
     });
 
     // 3c. Flatten the baseline and candidate directories

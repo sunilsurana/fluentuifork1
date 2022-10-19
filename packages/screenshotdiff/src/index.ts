@@ -38,7 +38,7 @@ const screenshotDiffCli = async () => {
       'Run this command if executing on the release build',
       yargs => yargs,
       async argv => {
-        await runUploadBaselineData(argv.buildId, argv.clientType);
+        await runUploadBaselineData(argv.buildId);
       },
     )
     .command(
