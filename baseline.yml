@@ -61,6 +61,9 @@ jobs:
           ArtifactName: 'vrscreenshot'
           publishLocation: 'Container'
 
+      - bash: cd packages/screenshotdiff && yarn build
+        displayName: 'Build'
+
       - bash: node packages/screenshotdiff/lib/index.js release --buildId $(Build.BuildId)
         displayName: 'Run Screenshotdiff update baseline'
 
