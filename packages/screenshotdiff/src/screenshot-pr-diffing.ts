@@ -23,7 +23,7 @@ const project = getProject();
 const owner = 'sunilsurana';
 const repo = 'fluentuifork1';
 
-const prNumber = 14;
+// const prNumber = 14;
 // const buildId = 270788;
 
 const diffResultContainer = 'diff-screenshots';
@@ -93,7 +93,11 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
     const pipelineId = build.definition.id;
     const pipelineName = build.definition.name;
     const sourceBranch = build.sourceBranch;
-    const commitId = build.sourceVersion;
+    var prNumber, commitId;
+    if (build.triggerInfo && build.sourceVersion) {
+      prNumber = build.triggerInfo['pr.number'];
+      commitId = build.sourceVersion;
+    }
 
     console.log('Step 1a - Initialized APIs 3');
     try {
