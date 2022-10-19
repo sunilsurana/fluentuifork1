@@ -72,18 +72,6 @@ jobs:
       #   env:
       #     SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
-      - powershell: |
-          $url = "https://dev.azure.com/office/office/_apis/build/builds?definitions=203&statusFilter=completed&resultFilter=succeeded&queryOrder=finishTimeDescending&`$top=1"
-          Write-Host "Looking up latest official build via url: $url"
-          $pipelineBuildInfo = Invoke-RestMethod -Uri $url -Headers @{Authorization = "Bearer $env:SYSTEM_ACCESSTOKEN"}
-          Write-Host "Response: $pipelineBuildInfo"
-          [int]$latestBuildId = $pipelineBuildInfo.value.id
-          Write-Host "Setting variable LatestBuildId=$latestBuildId"
-          Write-Host "##vso[task.setvariable variable=LatestBuildId]$latestBuildId"
-        name: GetLatestGreenCIBuild
-        env:
-          SYSTEM_ACCESSTOKEN: $(System.AccessToken)
-
       - bash: cd packages/screenshotdiff && yarn build
         displayName: 'Build'
 
