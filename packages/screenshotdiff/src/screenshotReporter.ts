@@ -49,7 +49,7 @@ export function createScreenshotDiffingContent(
       `&env=prod`;
     const title =
       `## [🕵 Open the Visual Regressions report to inspect the ${screenshotAffected} screenshots]( ${appUrl}` + `)`;
-    const disclaimer = '_watch out, the screenshots are still a bit noisy, mostly due to timing issues_';
+    // const disclaimer = '_watch out, the screenshots are still a bit noisy, mostly due to timing issues_';
 
     let diffSectionData: DiffSectionData[] = [];
     let sections: string[] = [];
@@ -87,10 +87,10 @@ export function createScreenshotDiffingContent(
       return createDiffSection(sectionData, table);
     });
     const additionalSection = getAdditionalSection(clientType, buildId);
-    const report = `${[title, disclaimer, summary, ...sections, additionalSection].join('\n\n')}\n`;
+    const report = `${[title, summary, ...sections, additionalSection].join('\n\n')}\n`;
     // There is a limit to comment length allowed in ADO. In case we exceed that, we skip the diff sections and just post report link.
     if (report.length >= 150000) {
-      return `${[title, disclaimer, getDiffExceededLimitSection(), additionalSection].join('\n\n')}\n`;
+      return `${[title, getDiffExceededLimitSection(), additionalSection].join('\n\n')}\n`;
     }
     return report;
   }
