@@ -34,7 +34,7 @@ jobs:
       - script: |
           yarn lage test:component --verbose
         displayName: 'Run VR tests'
-        
+
       - script: |
           mkdir -p screenshots
           cp -rf apps/vr-tests-react-components/dist/screenshots/*.png screenshots/
@@ -60,9 +60,8 @@ jobs:
           PathtoPublish: 'screenshots'
           ArtifactName: 'vrscreenshot'
           publishLocation: 'Container'
-          
-      - bash: node packages/screenshotdiff/dist/index.js release --buildId $(Build.BuildId)
-        displayName: "Run Screenshotdiff update baseline"
-          
-      - template: .devops/templates/cleanup.yml
 
+      - bash: node packages/screenshotdiff/lib/index.js release --buildId $(Build.BuildId)
+        displayName: 'Run Screenshotdiff update baseline'
+
+      - template: .devops/templates/cleanup.yml
