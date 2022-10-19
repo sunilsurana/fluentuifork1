@@ -99,7 +99,7 @@ jobs:
           Write-Host "##vso[task.setvariable variable=LatestBuildId]$latestBuildId"
         name: GetLatestGreenCIBuild
         env:
-          SYSTEM_ACCESSTOKEN: $(Sys)
+          SYSTEM_ACCESSTOKEN: $(System.AccessToken)
 
       - bash: cd packages/screenshotdiff && yarn build
         displayName: 'Build'
