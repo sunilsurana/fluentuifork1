@@ -314,7 +314,13 @@ export async function getArtifactsFromBlobStorageAndWriteToLocalFolderNew({
 
   const containerClient = blobService.getContainerClient(container);
 
-  await createFolderInApp('baseline_folder/vrscreenshot');
+  await createFolderInApp(localFolderPath + '/vrscreenshot');
+
+  console.log('local folder: ');
+
+  console.log('local folder: ' + localFolderPath);
+
+  console.log('local folder: ');
 
   await listBlobHierarchical(containerClient, localFolderPath);
 }
@@ -332,11 +338,14 @@ async function listBlobHierarchical(containerClient, virtualHierarchyDelimiter =
     includeSnapshots: false,
     includeTags: true,
     includeVersions: false,
-    prefix: '',
+    prefix: virtualHierarchyDelimiter,
   };
 
   let i = 1;
+  console.log('tt');
   console.log(`Folder ${virtualHierarchyDelimiter}`);
+
+  console.log('tt1');
 
   for await (const response of containerClient
     .listBlobsByHierarchy(virtualHierarchyDelimiter, listOptions)

@@ -1,5 +1,5 @@
 export const Greeter = (name: string) => `Hello ${name}`;
-import { flattenDirectory, prepareFolders } from './directoryHelper';
+import { createFolderInApp, flattenDirectory, prepareFolders } from './directoryHelper';
 import { getfirstCommitOfLGCI, getParentCommitFromMaster } from './azure-builddata/getParentCommitFromMaster';
 import { diffFolders } from 'pixel-buffer-diff-folders';
 import * as fs from 'fs';
@@ -82,7 +82,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
     // // ba.
     const apis = await getApis();
     console.log('Step 1a - Initialized APIs 2');
-    const candiateDataFolder = 'candidate_folder';
+    const candidateDataFolder = 'candidate-' + buildId;
 
     const baselineCommitId = await getfirstCommitOfLGCI(lkgCIBuild, apis);
 
@@ -103,7 +103,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
 
     console.log('Step 1a - Initialized APIs 3');
     try {
-      await downloadBuildArtifact(buildId, buildArtifactFolder, candiateDataFolder, apis);
+      await downloadBuildArtifact(buildId, buildArtifactFolder, candidateDataFolder, apis);
       console.log('Step 3a - Downloaded and Extracted candidate build artifacts');
     } catch {
       console.log('Step 3a - Error: Failed downloading/unzipping candidate build artifacts');
@@ -115,7 +115,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
     const blobUploadConfigCandidate: BlobUploadConfig = getDefaultBlobUploadConfig(
       candidateContainer,
       'testClient/artifact',
-      'candidate_folder',
+      candidateDataFolder,
     );
 
     // blobUploadConfigCandidate.generateSasToken = false;
@@ -140,13 +140,16 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
     // const baselinePath = await flattenDirectory('baseline_folder/vrscreenshot', separator);
     // const candidatePath = await flattenDirectory('candidate_folder/vrscreenshot', separator);
 
-    const baselinePath = 'baseline_folder/vrscreenshot';
-    const candidatePath = 'candidate_folder/vrscreenshot';
+    const baselinePath = baselineFolder + '/vrscreenshot';
+    const candidatePath = candidateDataFolder + '/vrscreenshot';
 
     console.log('Step 3c - Flattened the baseline and candidate directories');
 
     // 4a. Perform Diffing between the baseline and candidate
-    const resultPath = 'diff-result';
+    const resultPath = 'diff-result-' + buildId + '/vrscreenshot';
+
+    await createFolderInApp(resultPath);
+
     const threshold = 0.04;
     const cumulatedThreshold = 1;
     let diffResult;
@@ -207,7 +210,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
     const diffUploadConfig: BlobUploadConfig = getDefaultBlobUploadConfig(
       diffResultContainer,
       'testClient/artifact',
-      'diff-result',
+      resultPath,
     );
 
     // blobUploadConfig.generateSasToken = false;
@@ -216,8 +219,8 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
     console.log('Success: Writing diff file(s) from a folder and wrote to Azure Blob');
 
     // 4d. Save and upload Visual Regression report
-    const reportSubFolderPath = resultPath;
-    const reportJsonFolderPath = join(reportSubFolderPath, 'reportContent.txt');
+    // const reportSubFolderPath = resultPath;
+    const reportJsonFolderPath = join(resultPath, 'reportContent.txt');
     const options: fs.WriteFileOptions = { encoding: 'utf-8' };
 
     const screenshotURLs = {};
@@ -240,7 +243,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
 
     // Scope blobUploadConfig to the report sub folder
     // diffUploadConfig.localFolder = reportSubFolderPath;
-    diffUploadConfig.localFolder = 'diff-result/';
+    diffUploadConfig.localFolder = resultPath;
     diffUploadConfig.fileExtension = 'txt';
 
     const uploadedReportFiles = await getArtifactsFromLocalFolderAndWriteToBlobStorage(diffUploadConfig);
