@@ -30,6 +30,7 @@ export async function runUploadBaselineData(buildId: number): Promise<void> {
   // let statusMessageScreenshot = '';
 
   try {
+    console.log('hello');
     const apis = await getApis();
 
     const lastMergeCommitId = await getLastCommitInBuild(buildId, apis);
