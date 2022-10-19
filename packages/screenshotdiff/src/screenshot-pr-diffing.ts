@@ -32,9 +32,6 @@ const baselineContainer = 'baseline-screenshots';
 const reportPath = 'reportContent.txt';
 // const pipelineId = 202;
 const buildArtifactFolder = 'vrscreenshot';
-// const lkgCIBuild = 270788;
-
-// import { Octokit as gihubApi } from '@octokit/net';
 
 const octokit = new gihubApi({
   auth: getEnv('GITHUB_API_TOKEN'),
@@ -52,34 +49,6 @@ async function startDiffing(): Promise<void> {
 export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number): Promise<void> {
   console.log('Step 1a - Initialized APIs');
   try {
-    // const build = await buildApi.getBuild(getProject(), buildId);
-
-    // const apis = await getApis();
-
-    // const f = await octokit.pulls.get({
-    //   owner: 'sunilsurana',
-    //   repo: 'fluentuifork1',
-    //   pull_number: 4,
-    // });
-
-    // const testCommit = await octokit.git.getCommit({
-    //   owner: 'sunilsurana',
-    //   repo: 'fluentuifork1',
-    //   commit_sha: '0ce7f19cd978be278ce200ac937f207cb9051984',
-    // });
-
-    // console.log(testCommit.data.parents);
-
-    // const folders = await prepareFolders(false, "PR", 123);
-
-    // const { gitApi, buildApi } = await getApis();
-
-    // //3.d Upload candidate screenshots to Azure blob storage
-    // // This is done to render the candidate images in the vr-approval app for thumbnails.
-    // // const blobUploadConfigCandidate: BlobUploadConfig = getDefaultBlobUploadConfig('', '', '');
-
-    // // const ba=buildApi.getArtifact("uifabric", 1234, "" );
-    // // ba.
     const apis = await getApis();
     console.log('Step 1a - Initialized APIs 2');
     const candidateDataFolder = 'candidate-' + buildId;
@@ -137,8 +106,6 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
 
     console.log('Flatten process');
     const separator = '#';
-    // const baselinePath = await flattenDirectory('baseline_folder/vrscreenshot', separator);
-    // const candidatePath = await flattenDirectory('candidate_folder/vrscreenshot', separator);
 
     const baselinePath = baselineFolder + '/vrscreenshot';
     const candidatePath = candidateDataFolder + '/vrscreenshot';
@@ -200,21 +167,12 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
       throw diffError;
     }
 
-    // 4c. Upload diff result with screenshots to Azure blob storage
-    // const blobUploadConfig: BlobUploadConfig = getDefaultBlobUploadConfig(
-    //   diffResultContainer,
-    //   diffBlobPrefix,
-    //   diffResultFolder,
-    // );
-
     const diffUploadConfig: BlobUploadConfig = getDefaultBlobUploadConfig(
       diffResultContainer,
       'testClient/artifact',
       resultPath,
     );
 
-    // blobUploadConfig.generateSasToken = false;
-    // blobUploadConfig.isGzip = false; // We don't compress/gzip screenshots
     const uploadedScreenshots = await getArtifactsFromLocalFolderAndWriteToBlobStorage(diffUploadConfig);
     console.log('Success: Writing diff file(s) from a folder and wrote to Azure Blob');
 
@@ -236,13 +194,9 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
     };
 
     console.log('the report file is:- ');
-    // console.log(reportSubFolderPath);
 
-    // fs.mkdirSync(reportSubFolderPath);
     fs.writeFileSync(reportJsonFolderPath, JSON.stringify(reportDetails), options);
 
-    // Scope blobUploadConfig to the report sub folder
-    // diffUploadConfig.localFolder = reportSubFolderPath;
     diffUploadConfig.localFolder = resultPath;
     diffUploadConfig.fileExtension = 'txt';
 
@@ -272,16 +226,6 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
       body: prCommentData,
     });
 
-    // const baselineCommitId = commitId;
-    // const commitDetails = await gitApi.getCommit(
-    //   baselineCommitId,
-    //   repository
-    // );
-    // let baselineCommitTime;
-    // if (commitDetails.author && commitDetails.author.date) {
-    //   baselineCommitTime = commitDetails.author.date.getTime() / 1000;
-    // }
-
     // updating diff data into  DB
     await updateScreenshotDiffData(
       diffResult,
@@ -297,19 +241,6 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
       baselineCommitId,
       0,
     );
-    // console.log(uploadedCandidateScreenshots);
-
-    // gihubApi;
-    // const lastMergeCommitDetails: CommitDetails = await getParentCommitFromMaster(270070, apis);
-
-    // console.log('Step 1a - Initialized APIs');
-
-    // // 1c. Find Commit Details for this PR Build
-
-    // console.log('Async function');
-
-    // const folders = await prepareFolders(false, 'pr', 270070);
-
     console.log('done!');
   } catch (diffError: any) {
     console.log(diffError);

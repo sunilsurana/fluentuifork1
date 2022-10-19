@@ -1,15 +1,3 @@
-// import {
-//   RunDiff,
-//   uploadBaselineArtifactToBlobstorage,
-// } from "./midgardbot-baseline-uploader";
-
-// import {
-//   BaselineScreenshotContainer1JS,
-//   cleanupDirectories,
-//   prepareFolders,
-//   ScreenshotArtifact,
-//   BuildDetailRow,
-// } from "./midgardbot-core";
 import * as path from 'path';
 import { downloadBuildArtifact, getLastCommitInBuild } from './azure-builddata/getBuildArtifact';
 import { getProject } from './azure-builddata/getProject';
@@ -52,26 +40,6 @@ export async function runUploadBaselineData(buildId: number): Promise<void> {
     console.log('Step 3a - Downloaded and Extracted candidate build artifacts');
     await getArtifactsFromLocalFolderAndWriteToBlobStorage(blobUploadConfigCandidate);
     console.log('Screenshots successfully sent to blob storage');
-    // statusMessageScreenshot = await uploadBaselineArtifactToBlobstorage(
-    //   buildId,
-    //   baseLineFolder,
-    //   BaselineScreenshotContainer1JS,
-    //   clientType,
-    //   ScreenshotArtifact,
-    //   runDiff,
-    //   { includeSubFolders: true }
-    // );
-
-    // if (statusMessageScreenshot.indexOf('Warning')) {
-    //   finalStatusCode = 403;
-    // }
-
-    // if (statusMessageScreenshot.indexOf('Success')) {
-    //   finalStatusCode = 200;
-    // }
-
-    // const statusMessage = statusMessageScreenshot;
-    // return { finalStatusCode, statusMessage };
 
     const { buildApi } = apis;
 
