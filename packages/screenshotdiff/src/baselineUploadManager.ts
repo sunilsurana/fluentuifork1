@@ -12,10 +12,12 @@
 // } from "./midgardbot-core";
 import * as path from 'path';
 import { downloadBuildArtifact, getLastCommitInBuild } from './azure-builddata/getBuildArtifact';
+import { getProject } from './azure-builddata/getProject';
 import { getDefaultBlobUploadConfig } from './azure-storage/azureStorageCommon';
 import { getArtifactsFromLocalFolderAndWriteToBlobStorage } from './azure-storage/getArtifactsFromBlobStorageAndWriteToLocalFolder';
 import { cleanupDirectories } from './directoryHelper';
 import { BlobUploadConfig, getApis } from './package-core';
+import { updateScreenshotData } from './vrApprovalAPIHelper';
 
 // import { runScreenshotDiffing } from "./screenshotDiffingManager";
 const buildArtifactFolder = 'vrscreenshot';
@@ -70,6 +72,28 @@ export async function runUploadBaselineData(buildId: number): Promise<void> {
 
     // const statusMessage = statusMessageScreenshot;
     // return { finalStatusCode, statusMessage };
+
+    const { buildApi } = apis;
+
+    const build = await buildApi.getBuild(getProject(), buildId);
+    if (build && build.definition && build.definition.id && build.sourceBranch && build.sourceVersion) {
+      const pipelineId = build.definition.id;
+      const sourceBranch = build.sourceBranch;
+      const commitId = build.sourceVersion;
+      const project = 'Office';
+      const organization = 'office';
+      const screenshotBlobFolderPath = '';
+      await updateScreenshotData(
+        buildId,
+        pipelineId,
+        organization,
+        project,
+        commitId,
+        sourceBranch,
+        screenshotBlobFolderPath,
+      );
+      console.log('screenshot Uploaded data sent to the VR approval cosmos db');
+    }
   } catch (exception) {
     console.log(exception.message);
   } finally {
