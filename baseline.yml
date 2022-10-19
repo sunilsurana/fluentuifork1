@@ -64,7 +64,7 @@ jobs:
       - bash: cd packages/screenshotdiff && yarn build
         displayName: 'Build'
 
-      - bash: node packages/screenshotdiff/lib/index.js release --buildId $(Build.BuildId)
+      - bash: node packages/screenshotdiff/lib/index.js release --clientType "fluentui" --buildId $(Build.BuildId)
         displayName: 'Run Screenshotdiff update baseline'
         env:
           API_URL: $(System.CollectionUri)
