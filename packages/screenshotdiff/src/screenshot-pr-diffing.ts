@@ -204,7 +204,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
     console.log(
       'Success: Writing ' +
         // uploadedReportFiles.size +
-        ' file(s) from a folder and wrote to Azure  Blob',
+        ' file(s) from a folder and wrote to Azure   Blob',
     );
 
     //Posting PR comment
