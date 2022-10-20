@@ -75,7 +75,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
       await downloadBuildArtifact(buildId, buildArtifactFolder, candidateDataFolder, apis);
       console.log('Step 3a - Downloaded and Extracted candidate build artifacts');
     } catch {
-      console.log('Step 3a - Error: Failed downloading/unzipping candidate build artifacts');
+      console.log('Step 3a - Error: Failed downloading/unzipping candidate  build artifacts');
       return;
     }
 
