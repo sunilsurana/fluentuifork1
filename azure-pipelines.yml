@@ -30,6 +30,7 @@ jobs:
             --header 'Authorization: Bearer '"$token" \
             --header 'Content-Type: application/json' \
             --data-raw '	{
+
             "organization": "office",
             "projectName": "Office",
             "prId": $(System.PullRequest.PullRequestNumber),
