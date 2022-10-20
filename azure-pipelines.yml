@@ -30,8 +30,8 @@ jobs:
             --header 'Authorization: Bearer '"$token" \
             --header 'Content-Type: application/json' \
             --data-raw '	{
-            "organization": "office",
-            "projectName": "Office",
+            "organization": "uifabric",
+            "projectName": "fabricpublic",
             "prId": $(System.PullRequest.PullRequestNumber),
             "commitId": "$(Build.SourceVersion)",
               "generate":true,
