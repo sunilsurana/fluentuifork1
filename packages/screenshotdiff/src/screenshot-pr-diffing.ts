@@ -107,13 +107,13 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
     console.log('Flatten process');
     const separator = '#';
 
-    const baselinePath = baselineFolder + '/vrscreenshot';
-    const candidatePath = candidateDataFolder + '/vrscreenshot';
+    const baselinePath = baselineFolder + '/' + buildArtifactFolder;
+    const candidatePath = candidateDataFolder + '/' + buildArtifactFolder;
 
     console.log('Step 3c - Flattened the baseline and candidate directories');
 
     // 4a. Perform Diffing between the baseline and candidate
-    const resultPath = 'diff-result-' + buildId + '/vrscreenshot';
+    const resultPath = 'diff-result-' + buildId + '/' + buildArtifactFolder;
 
     await createFolderInApp(resultPath);
 

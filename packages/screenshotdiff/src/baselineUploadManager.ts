@@ -48,18 +48,10 @@ export async function runUploadBaselineData(buildId: number): Promise<void> {
       const pipelineId = build.definition.id;
       const sourceBranch = build.sourceBranch;
       const commitId = build.sourceVersion;
-      const project = 'Office';
-      const organization = 'office';
-      const screenshotBlobFolderPath = '';
-      await updateScreenshotData(
-        buildId,
-        pipelineId,
-        organization,
-        project,
-        commitId,
-        sourceBranch,
-        screenshotBlobFolderPath,
-      );
+      const project = getProject();
+      const organization = 'uifabric';
+      const screenshotBlobFolderPath = baselineFolder;
+      await updateScreenshotData(buildId, pipelineId, organization, project, commitId, sourceBranch, baselineFolder);
       console.log('screenshot Uploaded data sent to the VR approval cosmos db');
     }
   } catch (exception) {
