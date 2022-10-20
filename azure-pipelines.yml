@@ -36,7 +36,6 @@ jobs:
             "commitId": "$(Build.SourceVersion)",
               "generate":true,
               "blockingPipeline":{
-
               },
               "nonBlockingPipeline":{
                 "15438": {
