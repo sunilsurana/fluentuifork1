@@ -188,9 +188,9 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
       screenshotURLs,
       diffResult,
       baselinePath: `baseline-${baselineCommitId}`,
-      candidatePath: '',
-      blobBaselinePath: '',
-      blobCandidatePath: '',
+      candidatePath: candidateDataFolder,
+      blobBaselinePath: baselinePath + '/',
+      blobCandidatePath: candidatePath,
     };
 
     console.log('the report file is:- ');
@@ -229,7 +229,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
     // updating diff data into  DB
     await updateScreenshotDiffData(
       diffResult,
-      reportPath,
+      resultPath + '/' + reportPath,
       buildId,
       project,
       commitId,
