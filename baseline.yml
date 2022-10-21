@@ -29,7 +29,7 @@ jobs:
 
       - script: |
           yarn workspace @fluentui/vr-tests-react-components screener:build
-        displayName: Build vr tests components package
+        displayName: Build VR tests components package
 
       - script: |
           yarn lage test:component --verbose
@@ -38,21 +38,6 @@ jobs:
       - script: |
           mkdir -p screenshots
           cp -rf apps/vr-tests-react-components/dist/screenshots/*.png screenshots/
-          cd screenshots
-          for file in *"\""*; do
-            echo $file
-            mv -- "$file" "${file//\"/}"
-          done
-
-          for file in *"<"*; do
-            echo $file
-            mv -- "$file" "${file//</ }"
-          done
-
-          for file in *">"*; do
-            echo $file
-            mv -- "$file" "${file//>/ }"
-          done
         displayName: Collate Artifacts
 
       - task: PublishBuildArtifacts@1
