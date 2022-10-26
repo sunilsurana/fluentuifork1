@@ -38,7 +38,7 @@ export function createScreenshotDiffingContent(
       diffJsonResult.screenshotsRemoved.length +
       diffJsonResult.screenshotsChanged.length;
     const appUrl =
-      `https://staticpagerelease.z16.web.core.windows.net/azurestaticapps/vr-approval-app/index.html?organization=` +
+      `https://staticpagerelease.z16.web.core.windows.net/azurestaticapps/vr-tool-fluent/index.html?organization=` +
       organization +
       `&project=` +
       project +
