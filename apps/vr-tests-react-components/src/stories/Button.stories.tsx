@@ -42,7 +42,7 @@ storiesOf('Button Converged', module)
   ))
   .addStory('Outline', () => (
     <Button id={buttonId} appearance="outline">
-      Hello, world
+      Hello, world 123
     </Button>
   ))
   .addStory(
