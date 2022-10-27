@@ -1,8 +1,11 @@
 {
   "name": "vrscreenshotdiff",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "screenshot diffing package",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "bin": {
     "screenshotdiff": "./bin/screenshotdiff.js"
   },
