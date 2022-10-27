@@ -1,6 +1,6 @@
 {
-  "name": "screenshotdiff",
-  "version": "1.0.0",
+  "name": "vrscreenshotdiff",
+  "version": "0.0.1",
   "description": "screenshot diffing package",
   "private": true,
   "main": "index.js",
