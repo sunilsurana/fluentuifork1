@@ -12,7 +12,8 @@ variables:
 
   - template: .devops/templates/variables.yml
 
-pool: '1ES-Host-Ubuntu'
+pool:
+  vmImage: ubuntu-latest
 
 jobs:
   - job: TestVRTool
