@@ -79,16 +79,14 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
       return;
     }
 
-    //3.d Upload candidate screenshots to Azure blob storage
-    // This is done to render the candidate images in the vr-approval app for thumbnails.
+    //3. Get configuration for containers
     const blobUploadConfigCandidate: BlobUploadConfig = getDefaultBlobUploadConfig(
       candidateContainer,
       'testClient/artifact',
       candidateDataFolder,
     );
 
-    // blobUploadConfigCandidate.generateSasToken = false;
-    // blobUploadConfigCandidate.isGzip = false; // We don't compress/gzip screenshots
+    //Upload candidate screenshots
     const uploadedCandidateScreenshots = await getArtifactsFromLocalFolderAndWriteToBlobStorage(
       blobUploadConfigCandidate,
     );
@@ -96,7 +94,6 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
     await getArtifactsFromBlobStorageAndWriteToLocalFolderNew({
       localFolderPath: baselineFolder,
       container: baselineContainer,
-      // blobFilePrefix: '/baseline_folder',
     });
 
     // 3c. Flatten the baseline and candidate directories
@@ -104,13 +101,8 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
     // This is a temporary solution. Proper solution tracked by:
     // https://msfast.visualstudio.com/People%20Experiences/_workitems/edit/334946
 
-    console.log('Flatten process');
-    const separator = '#';
-
     const baselinePath = baselineFolder + '/' + buildArtifactFolder;
     const candidatePath = candidateDataFolder + '/' + buildArtifactFolder;
-
-    console.log('Step 3c - Flattened the baseline and candidate directories');
 
     // 4a. Perform Diffing between the baseline and candidate
     const resultPath = 'diff-result-' + buildId + '/' + buildArtifactFolder;
@@ -182,7 +174,6 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
     const options: fs.WriteFileOptions = { encoding: 'utf-8' };
 
     const screenshotURLs = {};
-    // uploadedScreenshots.forEach((value: string, key: string) => (screenshotURLs[key] = value));
 
     const reportDetails: ReportDetail = {
       screenshotURLs,
