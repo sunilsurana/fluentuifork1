@@ -23,14 +23,11 @@ const project = getProject();
 const owner = 'sunilsurana';
 const repo = 'fluentuifork1';
 
-// const prNumber = 14;
-// const buildId = 270788;
-
 const diffResultContainer = 'diff-screenshots';
 const candidateContainer = 'candidate-screenshots';
 const baselineContainer = 'baseline-screenshots';
 const reportPath = 'reportContent.txt';
-// const pipelineId = 202;
+
 const buildArtifactFolder = 'vrscreenshot';
 
 const octokit = new gihubApi({
@@ -210,12 +207,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
       commitId,
     );
 
-    await octokit.rest.issues.createComment({
-      owner: owner,
-      repo: repo,
-      issue_number: prNumber,
-      body: prCommentData,
-    });
+    fs.writeFileSync('vr-comment.txt', prCommentData, options);
 
     // updating diff data into  DB
     await updateScreenshotDiffData(
