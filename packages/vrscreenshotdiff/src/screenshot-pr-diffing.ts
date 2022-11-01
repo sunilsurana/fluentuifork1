@@ -197,7 +197,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
 
     //Posting PR comment
 
-    const prCommentData = createScreenshotDiffingContent(
+    let prCommentData = createScreenshotDiffingContent(
       diffResult,
       'pr',
       buildId,
@@ -207,7 +207,38 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number):
       commitId,
     );
 
-    fs.writeFileSync('vr-comment.txt', prCommentData, options);
+    prCommentData = prCommentData + '<div id="vrtComment"/>';
+
+    const commentList = await octokit.rest.issues.listComments({
+      owner: owner,
+      repo: repo,
+      issue_number: prNumber,
+    });
+
+    const arrayComment = commentList.data;
+    let issueId = -1;
+
+    arrayComment.forEach(item => {
+      if (item.body.includes('vrtComment')) {
+        issueId = item.id;
+      }
+    });
+
+    if (issueId === -1) {
+      await octokit.rest.issues.createComment({
+        owner: owner,
+        repo: repo,
+        issue_number: prNumber,
+        body: prCommentData,
+      });
+    } else {
+      await octokit.rest.issues.updateComment({
+        owner: owner,
+        repo: repo,
+        comment_id: issueId,
+        body: prCommentData,
+      });
+    }
 
     // updating diff data into  DB
     await updateScreenshotDiffData(
