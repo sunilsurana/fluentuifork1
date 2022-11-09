@@ -15,7 +15,7 @@ variables:
 pool: '1ES-Host-Ubuntu'
 
 jobs:
-  - job: VRToolUpdateBaseline-V9
+  - job: VRToolUpdateBaseline_V9
     workspace:
       clean: all
     steps:
@@ -69,7 +69,7 @@ jobs:
           BLOB_CONNECTION_STRING: $(BLOB-CONNECTION-STRING)
           VR_APPROVAL_CLIENT_SECRET: $(VR-APPROVAL-CLIENT-SECRET)
 
-  - job: VRToolUpdateBaseline-V8
+  - job: VRToolUpdateBaseline_V8
     workspace:
       clean: all
     steps:
