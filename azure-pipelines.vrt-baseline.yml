@@ -35,7 +35,7 @@ jobs:
         displayName: Build VR tests components package
 
       - script: |
-          yarn lage test:component --verbose
+          yarn workspace @fluentui/vr-tests-react-components test:component --verbose
         displayName: 'Run VR tests'
 
       - script: |
