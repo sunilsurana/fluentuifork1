@@ -56,13 +56,14 @@ jobs:
       # - bash: cd packages/screenshotdiff && yarn build
       #   displayName: 'Build'
 
-      - bash: node node_modules/vrscreenshotdiff/lib/index.js release --clientType "fluentuiv9" --buildId $(Build.BuildId)
+      - bash: node node_modules/vrscreenshotdiff/lib/index.js release --clientType "fluentui" --buildId $(Build.BuildId)_v9
         displayName: 'Run Screenshotdiff update baseline'
         env:
           API_URL: $(System.CollectionUri)
           API_TOKEN: $(TEST_PAT)
           API_REPOSITORY: $(Build.Repository.Name)
           API_PROJECT: $(System.TeamProject)
+          SCREENSHOT_ARTIFACT_FOLDER: vrscreenshotv9
           GITHUB_API_TOKEN: $(GITHUB_TEST_PAT)
           STORAGE_ACCOUNT_FLUENTUI: $(STORAGE-ACCOUNT-FLUENTUI)
           STORAGE_KEY_FLUENTUI: $(STORAGE-KEY-BLOB-FLUENTUI)
@@ -106,13 +107,14 @@ jobs:
       # - bash: cd packages/screenshotdiff && yarn build
       #   displayName: 'Build'
 
-      - bash: node node_modules/vrscreenshotdiff/lib/index.js release --clientType "fluentuiv8" --buildId $(Build.BuildId)
+      - bash: node node_modules/vrscreenshotdiff/lib/index.js release --clientType "fluentui" --buildId $(Build.BuildId)_v8
         displayName: 'Run Screenshotdiff update baseline'
         env:
           API_URL: $(System.CollectionUri)
           API_TOKEN: $(TEST_PAT)
           API_REPOSITORY: $(Build.Repository.Name)
           API_PROJECT: $(System.TeamProject)
+          SCREENSHOT_ARTIFACT_FOLDER: vrscreenshotv8
           GITHUB_API_TOKEN: $(GITHUB_TEST_PAT)
           STORAGE_ACCOUNT_FLUENTUI: $(STORAGE-ACCOUNT-FLUENTUI)
           STORAGE_KEY_FLUENTUI: $(STORAGE-KEY-BLOB-FLUENTUI)
