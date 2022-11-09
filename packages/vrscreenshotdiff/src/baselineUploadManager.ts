@@ -8,7 +8,9 @@ import { BlobUploadConfig, getApis } from './package-core';
 import { updateScreenshotData } from './vrApprovalAPIHelper';
 
 // import { runScreenshotDiffing } from "./screenshotDiffingManager";
-const buildArtifactFolder = 'vrscreenshot';
+const buildArtifactFolder = process.env['SCREENSHOT_ARTIFACT_FOLDER']
+  ? process.env['SCREENSHOT_ARTIFACT_FOLDER']
+  : 'vrscreenshot';
 const diffResultContainer = 'diff-screenshots';
 const candidateContainer = 'candidate-screenshots';
 const baselineContainer = 'baseline-screenshots';
