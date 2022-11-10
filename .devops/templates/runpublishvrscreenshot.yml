@@ -43,5 +43,5 @@ steps:
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: 'screenshots'
-      ArtifactName: 'vrscreenshot{{ parameters.fluentVersion }}'
+      ArtifactName: 'vrscreenshot${{ parameters.fluentVersion }}'
       publishLocation: 'Container'

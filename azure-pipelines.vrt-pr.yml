@@ -40,7 +40,7 @@ jobs:
               "nonBlockingPipeline":{
                 "202": {
                   "pipelineStatus": "PENDING",
-                  "pipelineName": "fluent-ui VRT Pipeline"
+                  "pipelineName": "fluent-ui VRT Pipeline v9"
                 }
               },
               "postPolicy": '${postPolicy}',
@@ -109,7 +109,7 @@ jobs:
               "nonBlockingPipeline":{
                 "202": {
                   "pipelineStatus": "PENDING",
-                  "pipelineName": "fluent-ui VRT Pipeline"
+                  "pipelineName": "fluent-ui VRT Pipeline v8"
                 }
               },
               "postPolicy": '${postPolicy}',
