@@ -56,7 +56,7 @@ jobs:
       # - bash: cd packages/screenshotdiff && yarn build
       #   displayName: 'Build'
 
-      - bash: node node_modules/vrscreenshotdiff/lib/index.js release --clientType "fluentui" --buildId $(Build.BuildId)_v9
+      - bash: node node_modules/vrscreenshotdiff/lib/index.js release --clientType "fluentui" --buildId $(Build.BuildId) --jobTag v9
         displayName: 'Run Screenshotdiff update baseline'
         env:
           API_URL: $(System.CollectionUri)
@@ -107,7 +107,7 @@ jobs:
       # - bash: cd packages/screenshotdiff && yarn build
       #   displayName: 'Build'
 
-      - bash: node node_modules/vrscreenshotdiff/lib/index.js release --clientType "fluentui" --buildId $(Build.BuildId)_v8
+      - bash: node node_modules/vrscreenshotdiff/lib/index.js release --clientType "fluentui" --buildId $(Build.BuildId) --jobTag v9
         displayName: 'Run Screenshotdiff update baseline'
         env:
           API_URL: $(System.CollectionUri)
