@@ -23,9 +23,9 @@ steps:
     displayName: Convert screener component to storywright
 
   - ${{ if eq(parameters.shouldbuildstorybookaddon, 'true') }}:
-  - script: |
-      yarn build --to @fluentui/react-storybook-addon
-    displayName: Build react-storybook-addon
+      - script: |
+          yarn build --to @fluentui/react-storybook-addon
+        displayName: Build react-storybook-addon
 
   - script: |
       yarn workspace ${{ parameters.storyPackageName }} screener:build
