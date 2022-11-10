@@ -15,7 +15,7 @@ const diffResultContainer = 'diff-screenshots';
 const candidateContainer = 'candidate-screenshots';
 const baselineContainer = 'baseline-screenshots';
 
-export async function runUploadBaselineData(buildId: number): Promise<void> {
+export async function runUploadBaselineData(buildId: number, jobTag: string): Promise<void> {
   // const folders = await prepareFolders(true, clientType, buildId);
   // const baseLineFolder: string = folders[0];
   let finalStatusCode = 500;
@@ -27,7 +27,7 @@ export async function runUploadBaselineData(buildId: number): Promise<void> {
 
     const lastMergeCommitId = await getLastCommitInBuild(buildId, apis);
 
-    var baselineFolder = 'baseline-' + lastMergeCommitId;
+    var baselineFolder = 'baseline-' + jobTag + '-' + lastMergeCommitId;
 
     await downloadBuildArtifact(buildId, buildArtifactFolder, baselineFolder, apis);
 

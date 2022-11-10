@@ -20,6 +20,13 @@ const screenshotDiffCli = async () => {
       type: 'number',
       demandOption: true,
     })
+    .option('jobTag', {
+      description: 'Tag to identify distinct job ',
+      alias: 'j',
+      normalize: true,
+      type: 'string',
+      demandOption: true,
+    })
     .option('lkgCIBuild', {
       description: 'Last green CI build ID',
       alias: 'g',
@@ -38,7 +45,7 @@ const screenshotDiffCli = async () => {
       'Run this command if executing on the release build',
       yargs => yargs,
       async argv => {
-        await runUploadBaselineData(argv.buildId);
+        await runUploadBaselineData(argv.buildId, argv.jobTag);
       },
     )
     .command(
@@ -46,7 +53,7 @@ const screenshotDiffCli = async () => {
       'Run this command if executing on the PR build',
       yargs => yargs,
       async argv => {
-        await runScreenshotDiffing(argv.buildId, argv.lkgCIBuild);
+        await runScreenshotDiffing(argv.buildId, argv.lkgCIBuild, argv.jobTag);
       },
     )
     .demandCommand().argv;

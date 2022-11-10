@@ -28,7 +28,9 @@ const candidateContainer = 'candidate-screenshots';
 const baselineContainer = 'baseline-screenshots';
 const reportPath = 'reportContent.txt';
 
-const buildArtifactFolder = 'vrscreenshot';
+const buildArtifactFolder = process.env['SCREENSHOT_ARTIFACT_FOLDER']
+  ? process.env['SCREENSHOT_ARTIFACT_FOLDER']
+  : 'vrscreenshot';
 
 const octokit = new gihubApi({
   auth: getEnv('GITHUB_API_TOKEN'),
@@ -43,16 +45,16 @@ async function startDiffing(): Promise<void> {
   // await runScreenshotDiffing();
 }
 
-export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number): Promise<void> {
+export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number, jobTag: string): Promise<void> {
   console.log('Step 1a - Initialized APIs');
   try {
     const apis = await getApis();
     console.log('Step 1a - Initialized APIs 2');
-    const candidateDataFolder = 'candidate-' + buildId;
+    const candidateDataFolder = 'candidate-' + jobTag + '-' + buildId;
 
     const baselineCommitId = await getfirstCommitOfLGCI(lkgCIBuild, apis);
 
-    var baselineFolder = 'baseline-' + baselineCommitId;
+    var baselineFolder = 'baseline-' + jobTag + '-' + baselineCommitId;
 
     console.log('baseline commit Id is :' + baselineCommitId);
 
