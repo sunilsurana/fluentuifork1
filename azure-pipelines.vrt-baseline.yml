@@ -21,7 +21,7 @@ jobs:
     steps:
       - template: .devops/templates/tools.yml
 
-      - template: .devops/templates/runpublishvrscreenshotv9.yml
+      - template: .devops/templates/runpublishvrscreenshot.yml
         parameters:
           fluentVersion: v9
           storyPackageName: '@fluentui/vr-tests-react-components'
@@ -48,7 +48,7 @@ jobs:
     steps:
       - template: .devops/templates/tools.yml
 
-      - template: .devops/templates/runpublishvrscreenshotv9.yml
+      - template: .devops/templates/runpublishvrscreenshot.yml
         parameters:
           fluentVersion: v88
           storyPackageName: '@fluentui/vr-tests'
