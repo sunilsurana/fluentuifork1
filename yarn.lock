@@ -26703,10 +26703,10 @@ void-elements@^2.0.0:
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
   integrity sha1-wGavtYK7HLQSjWDqkjkulNXp2+w=
 
-vrscreenshotdiff@0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/vrscreenshotdiff/-/vrscreenshotdiff-0.0.7.tgz#13a926a3e080f67004410f40f09983a534bf1537"
-  integrity sha512-dKNuA1oYU6UcsUwyUH8OM9Ag/rtO/llRNOISqJbfUwjFYTZnGMhLy9MBEU+zzdFubtIH6kcPfov4QnWOBNFMPg==
+vrscreenshotdiff@0.0.7-beta.1:
+  version "0.0.7-beta.1"
+  resolved "https://registry.yarnpkg.com/vrscreenshotdiff/-/vrscreenshotdiff-0.0.7-beta.1.tgz#40988b94eb9ab83fcf6ef72d9dd4647d456f20a0"
+  integrity sha512-CqA3LyZ+xBj/oSXpVHaFpyZz2Sy6/x5Xtma9pJh5RNTCpM6UCGDaBEzUGAjE1N+WYZYwXSBm7p8RUbUSnOTw2w==
   dependencies:
     "@octokit/rest" "^19.0.3"
     adal-node "^0.2.3"
