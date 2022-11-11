@@ -45,7 +45,7 @@ const screenshotDiffCli = async () => {
       'Run this command if executing on the release build',
       yargs => yargs,
       async argv => {
-        await runUploadBaselineData(argv.buildId, argv.jobTag);
+        await runUploadBaselineData(argv.buildId, argv.clientType);
       },
     )
     .command(
@@ -53,7 +53,7 @@ const screenshotDiffCli = async () => {
       'Run this command if executing on the PR build',
       yargs => yargs,
       async argv => {
-        await runScreenshotDiffing(argv.buildId, argv.lkgCIBuild, argv.jobTag);
+        await runScreenshotDiffing(argv.buildId, argv.lkgCIBuild, argv.clientType);
       },
     )
     .demandCommand().argv;

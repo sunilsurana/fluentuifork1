@@ -291,6 +291,7 @@ export async function getArtifactsFromLocalFolderAndWriteToBlobStorage({
 export async function getArtifactsFromBlobStorageAndWriteToLocalFolderNew({
   localFolderPath,
   container,
+  suffix,
   blobFilePrefix = '',
   // generateSasToken = false,
   // isGzip = false,
@@ -314,7 +315,7 @@ export async function getArtifactsFromBlobStorageAndWriteToLocalFolderNew({
 
   const containerClient = blobService.getContainerClient(container);
 
-  await createFolderInApp(localFolderPath + '/vrscreenshot');
+  await createFolderInApp(localFolderPath + '/vrscreenshot' + suffix);
 
   console.log('local folder: ');
 

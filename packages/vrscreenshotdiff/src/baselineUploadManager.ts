@@ -15,7 +15,7 @@ const diffResultContainer = 'diff-screenshots';
 const candidateContainer = 'candidate-screenshots';
 const baselineContainer = 'baseline-screenshots';
 
-export async function runUploadBaselineData(buildId: number, jobTag: string): Promise<void> {
+export async function runUploadBaselineData(buildId: number, clientType: string): Promise<void> {
   // const folders = await prepareFolders(true, clientType, buildId);
   // const baseLineFolder: string = folders[0];
   let finalStatusCode = 500;
@@ -27,7 +27,7 @@ export async function runUploadBaselineData(buildId: number, jobTag: string): Pr
 
     const lastMergeCommitId = await getLastCommitInBuild(buildId, apis);
 
-    var baselineFolder = 'baseline-' + jobTag + '-' + lastMergeCommitId;
+    var baselineFolder = clientType + '/baseline-' + lastMergeCommitId;
 
     await downloadBuildArtifact(buildId, buildArtifactFolder, baselineFolder, apis);
 
@@ -35,7 +35,7 @@ export async function runUploadBaselineData(buildId: number, jobTag: string): Pr
     // This is done to render the candidate images in the vr-approval app for thumbnails.
     const blobUploadConfigCandidate: BlobUploadConfig = getDefaultBlobUploadConfig(
       baselineContainer,
-      'testClient/artifact',
+      clientType,
       baselineFolder,
     );
 

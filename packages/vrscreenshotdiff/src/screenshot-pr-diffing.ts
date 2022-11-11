@@ -45,16 +45,16 @@ async function startDiffing(): Promise<void> {
   // await runScreenshotDiffing();
 }
 
-export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number, jobTag: string): Promise<void> {
+export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number, clientType: string): Promise<void> {
   console.log('Step 1a - Initialized APIs');
   try {
     const apis = await getApis();
     console.log('Step 1a - Initialized APIs 2');
-    const candidateDataFolder = 'candidate-' + jobTag + '-' + buildId;
+    const candidateDataFolder = clientType + '/candidate-' + buildId;
 
     const baselineCommitId = await getfirstCommitOfLGCI(lkgCIBuild, apis);
 
-    var baselineFolder = 'baseline-' + jobTag + '-' + baselineCommitId;
+    var baselineFolder = clientType + '/baseline-' + baselineCommitId;
 
     console.log('baseline commit Id is :' + baselineCommitId);
 
@@ -81,7 +81,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number, 
     //3. Get configuration for containers
     const blobUploadConfigCandidate: BlobUploadConfig = getDefaultBlobUploadConfig(
       candidateContainer,
-      'testClient/artifact',
+      clientType,
       candidateDataFolder,
     );
 
@@ -90,9 +90,12 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number, 
       blobUploadConfigCandidate,
     );
 
+    let folderSuffix = 'v9';
+    if (clientType === 'fluentuiv8') folderSuffix = 'v8';
     await getArtifactsFromBlobStorageAndWriteToLocalFolderNew({
       localFolderPath: baselineFolder,
       container: baselineContainer,
+      suffix: folderSuffix,
     });
 
     // 3c. Flatten the baseline and candidate directories
@@ -104,7 +107,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number, 
     const candidatePath = candidateDataFolder + '/' + buildArtifactFolder;
 
     // 4a. Perform Diffing between the baseline and candidate
-    const resultPath = 'diff-result-' + buildId + '/' + buildArtifactFolder;
+    const resultPath = clientType + '/diff-result-' + buildId + '/' + buildArtifactFolder;
 
     await createFolderInApp(resultPath);
 
@@ -209,7 +212,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number, 
       commitId,
     );
 
-    prCommentData = prCommentData + '<div id="vrtComment"/>';
+    prCommentData = prCommentData + '<div id="vrtComment' + clientType + '"/>';
 
     const commentList = await octokit.rest.issues.listComments({
       owner: owner,
@@ -221,7 +224,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number, 
     let issueId = -1;
 
     arrayComment.forEach(item => {
-      if (item.body.includes('vrtComment')) {
+      if (item.body.includes('vrtComment' + clientType)) {
         issueId = item.id;
       }
     });
