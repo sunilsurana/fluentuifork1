@@ -38,7 +38,7 @@ jobs:
               "blockingPipeline":{
               },
               "nonBlockingPipeline":{
-                "202": {
+                "211": {
                   "pipelineStatus": "PENDING",
                   "pipelineName": "fluent-ui VRT Pipeline v9"
                 }
@@ -70,7 +70,7 @@ jobs:
           SYSTEM_ACCESSTOKEN: $(System.AccessToken)
           BASELINE_PIPELINE_ID: $(BASELINE-PIPELINE-ID)
 
-      - bash: node node_modules/vrscreenshotdiff/lib/index.js pr --clientType "fluentui" --buildId $(Build.BuildId) --lkgCIBuild $(LatestBuildId) --jobTag v9
+      - bash: node node_modules/vrscreenshotdiff/lib/index.js pr --clientType "fluentuiv9" --buildId $(Build.BuildId) --lkgCIBuild $(LatestBuildId) --jobTag v9
         displayName: 'Run fluentui-screenshotdiff'
         env:
           API_URL: $(System.CollectionUri)
@@ -107,7 +107,7 @@ jobs:
               "blockingPipeline":{
               },
               "nonBlockingPipeline":{
-                "202": {
+                "212": {
                   "pipelineStatus": "PENDING",
                   "pipelineName": "fluent-ui VRT Pipeline v8"
                 }
@@ -139,7 +139,7 @@ jobs:
           SYSTEM_ACCESSTOKEN: $(System.AccessToken)
           BASELINE_PIPELINE_ID: $(BASELINE-PIPELINE-ID)
 
-      - bash: node node_modules/vrscreenshotdiff/lib/index.js pr --clientType "fluentui" --buildId $(Build.BuildId) --lkgCIBuild $(LatestBuildId) --jobTag v8
+      - bash: node node_modules/vrscreenshotdiff/lib/index.js pr --clientType "fluentuiv8" --buildId $(Build.BuildId) --lkgCIBuild $(LatestBuildId) --jobTag v8
         displayName: 'Run fluentui-screenshotdiff'
         env:
           API_URL: $(System.CollectionUri)
