@@ -16,6 +16,10 @@ pool: '1ES-Host-Ubuntu'
 
 jobs:
   - job: VisualRegressionTest_V9
+    variables:
+      pipelineid: '211'
+      pipelineName: 'fluent-ui VRT Pipeline v9a'
+
     workspace:
       clean: all
     steps:
@@ -38,9 +42,9 @@ jobs:
               "blockingPipeline":{
               },
               "nonBlockingPipeline":{
-                "211": {
+                "$(pipelineid)": {
                   "pipelineStatus": "PENDING",
-                  "pipelineName": "fluent-ui VRT Pipeline v9"
+                  "pipelineName": "$(pipelineName)"
                 }
               },
               "postPolicy": '${postPolicy}',
@@ -85,6 +89,9 @@ jobs:
           VR_APPROVAL_CLIENT_SECRET: $(VR-APPROVAL-CLIENT-SECRET)
 
   - job: VisualRegressionTest_V8
+    variables:
+      pipelineid: '212'
+      pipelineName: 'fluent-ui VRT Pipeline v8b'
     workspace:
       clean: all
     steps:
@@ -107,9 +114,9 @@ jobs:
               "blockingPipeline":{
               },
               "nonBlockingPipeline":{
-                "212": {
+                "$(pipelineid)": {
                   "pipelineStatus": "PENDING",
-                  "pipelineName": "fluent-ui VRT Pipeline v8"
+                  "pipelineName": "$(pipelineName)"
                 }
               },
               "postPolicy": '${postPolicy}',
