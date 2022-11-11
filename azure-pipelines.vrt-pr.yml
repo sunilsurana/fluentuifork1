@@ -116,7 +116,7 @@ jobs:
               "nonBlockingPipeline":{
                 "$(pipelineid)": {
                   "pipelineStatus": "PENDING",
-                  "pipelineName": "$(pipelineNameq)"
+                  "pipelineName": "$(pipelineName)"
                 }
               },
               "postPolicy": '${postPolicy}',
