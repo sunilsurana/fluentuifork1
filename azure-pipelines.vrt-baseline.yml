@@ -50,7 +50,7 @@ jobs:
 
       - template: .devops/templates/runpublishvrscreenshot.yml
         parameters:
-          fluentVersion: v88
+          fluentVersion: v8
           storyPackageName: '@fluentui/vr-tests'
           storyPackagePath: 'apps/vr-tests'
           shouldbuildstorybookaddon: false
