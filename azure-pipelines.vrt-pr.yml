@@ -17,8 +17,8 @@ pool: '1ES-Host-Ubuntu'
 jobs:
   - job: VisualRegressionTest_V9
     variables:
-      pipelineid: '211'
-      pipelineName: 'fluent-ui VRT Pipeline v9a'
+      pipelineId: '211'
+      pipelineName: 'fluent-ui VRT Pipeline v9'
 
     workspace:
       clean: all
@@ -74,7 +74,7 @@ jobs:
           SYSTEM_ACCESSTOKEN: $(System.AccessToken)
           BASELINE_PIPELINE_ID: $(BASELINE-PIPELINE-ID)
 
-      - bash: node node_modules/vrscreenshotdiff/lib/index.js pr --clientType "fluentuiv9" --buildId $(Build.BuildId) --lkgCIBuild $(LatestBuildId) --jobTag v9
+      - bash: node node_modules/vrscreenshotdiff/lib/index.js pr --clientType "fluentuiv9" --buildId $(Build.BuildId) --lkgCIBuild $(LatestBuildId) --pipelineId $(pipelineId) --pipelineName $(pipelineName)
         displayName: 'Run fluentui-screenshotdiff'
         env:
           API_URL: $(System.CollectionUri)
@@ -90,8 +90,8 @@ jobs:
 
   - job: VisualRegressionTest_V8
     variables:
-      pipelineid: '212'
-      pipelineName: 'fluent-ui VRT Pipeline v8b'
+      pipelineId: '212'
+      pipelineName: 'fluent-ui VRT Pipeline v8'
     workspace:
       clean: all
     steps:
@@ -116,7 +116,7 @@ jobs:
               "nonBlockingPipeline":{
                 "$(pipelineid)": {
                   "pipelineStatus": "PENDING",
-                  "pipelineName": "$(pipelineName)"
+                  "pipelineName": "$(pipelineNameq)"
                 }
               },
               "postPolicy": '${postPolicy}',
@@ -146,7 +146,7 @@ jobs:
           SYSTEM_ACCESSTOKEN: $(System.AccessToken)
           BASELINE_PIPELINE_ID: $(BASELINE-PIPELINE-ID)
 
-      - bash: node node_modules/vrscreenshotdiff/lib/index.js pr --clientType "fluentuiv8" --buildId $(Build.BuildId) --lkgCIBuild $(LatestBuildId) --jobTag v8
+      - bash: node node_modules/vrscreenshotdiff/lib/index.js pr --clientType "fluentuiv8" --buildId $(Build.BuildId) --lkgCIBuild $(LatestBuildId) --pipelineId $(pipelineId) --pipelineName $(pipelineName)
         displayName: 'Run fluentui-screenshotdiff'
         env:
           API_URL: $(System.CollectionUri)
