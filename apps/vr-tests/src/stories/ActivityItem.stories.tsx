@@ -38,7 +38,7 @@ storiesOf('ActivityItem', module)
           { imageInitials: 'EF' },
           { imageInitials: 'GH' },
         ]}
-        activityDescription={<span>description text</span>}
+        activityDescription={<span>descriptionDDD text</span>}
         comments={<span>comment text</span>}
         timeStamp="timeStamp text"
       />
