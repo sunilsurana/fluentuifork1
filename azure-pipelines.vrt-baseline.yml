@@ -28,7 +28,7 @@ jobs:
           storyPackagePath: 'apps/vr-tests-react-components'
           shouldbuildstorybookaddon: true
 
-      - bash: node node_modules/vrscreenshotdiff/lib/index.js release --clientType "fluentui" --buildId $(Build.BuildId) --jobTag v9
+      - bash: node node_modules/vrscreenshotdiff/lib/index.js release --clientType "fluentuiv9" --buildId $(Build.BuildId) --jobTag v9
         displayName: 'Run Screenshotdiff update baseline'
         env:
           API_URL: $(System.CollectionUri)
@@ -55,7 +55,7 @@ jobs:
           storyPackagePath: 'apps/vr-tests'
           shouldbuildstorybookaddon: false
 
-      - bash: node node_modules/vrscreenshotdiff/lib/index.js release --clientType "fluentui" --buildId $(Build.BuildId) --jobTag v9
+      - bash: node node_modules/vrscreenshotdiff/lib/index.js release --clientType "fluentuiv8" --buildId $(Build.BuildId) --jobTag v9
         displayName: 'Run Screenshotdiff update baseline'
         env:
           API_URL: $(System.CollectionUri)
