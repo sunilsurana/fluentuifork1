@@ -45,7 +45,13 @@ async function startDiffing(): Promise<void> {
   // await runScreenshotDiffing();
 }
 
-export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number, clientType: string): Promise<void> {
+export async function runScreenshotDiffing(
+  buildId: number,
+  lkgCIBuild: number,
+  clientType: string,
+  pipelineId: string,
+  pipelineName: string,
+): Promise<void> {
   console.log('Step 1a - Initialized APIs');
   try {
     const apis = await getApis();
@@ -60,8 +66,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number, 
 
     const { buildApi } = apis;
     const build = await buildApi.getBuild(project, buildId);
-    const pipelineId = build.definition.id;
-    const pipelineName = build.definition.name;
+
     const sourceBranch = build.sourceBranch;
     var prNumber, commitId;
     if (build.triggerInfo && build.sourceVersion) {
@@ -210,6 +215,7 @@ export async function runScreenshotDiffing(buildId: number, lkgCIBuild: number, 
       project,
       prNumber,
       commitId,
+      clientType,
     );
 
     prCommentData = prCommentData + '<div id="vrtComment' + clientType + '"/>';

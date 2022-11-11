@@ -37,7 +37,7 @@ export async function updateScreenshotDiffData(
   buildId: number,
   project: string,
   commitId: string,
-  pipelineId: number,
+  pipelineId: string,
   pipelineName: string,
   prId: number,
   sourceBranch: string,

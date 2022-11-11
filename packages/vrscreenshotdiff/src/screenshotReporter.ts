@@ -27,6 +27,7 @@ export function createScreenshotDiffingContent(
   project: string,
   prId: number,
   commitId: string,
+  clientType1: string,
 ): string {
   if (
     (diffJsonResult.screenshotsChanged && diffJsonResult.screenshotsChanged.length > 0) ||
@@ -48,7 +49,8 @@ export function createScreenshotDiffingContent(
       commitId +
       `&env=prod`;
     const title =
-      `## [🕵 Open the Visual Regressions report to inspect the ${screenshotAffected} screenshots]( ${appUrl}` + `)`;
+      `## [🕵 ${clientType1} Open the Visual Regressions report to inspect the ${screenshotAffected} screenshots]( ${appUrl}` +
+      `)`;
     // const disclaimer = '_watch out, the screenshots are still a bit noisy, mostly due to timing issues_';
 
     let diffSectionData: DiffSectionData[] = [];
@@ -95,7 +97,7 @@ export function createScreenshotDiffingContent(
     return report;
   }
   {
-    const title = `## 🕵 No visual regressions between this PR and main`;
+    const title = `## 🕵 ${clientType1} No visual regressions between this PR and main`;
     return `${[title].join('\n\n')}\n`;
   }
 }
