@@ -20,14 +20,14 @@ const screenshotDiffCli = async () => {
       type: 'number',
       demandOption: true,
     })
-    .option('pipelineid', {
+    .option('pipelineId', {
       description: 'Pipeline identified ',
       alias: 'pi',
       normalize: true,
       type: 'string',
       demandOption: true,
     })
-    .option('pipelinename', {
+    .option('pipelineName', {
       description: 'Pipeline name ',
       alias: 'pn',
       normalize: true,
@@ -60,7 +60,7 @@ const screenshotDiffCli = async () => {
       'Run this command if executing on the PR build',
       yargs => yargs,
       async argv => {
-        await runScreenshotDiffing(argv.buildId, argv.lkgCIBuild, argv.clientType, argv.pipelineid, argv.pipelinename);
+        await runScreenshotDiffing(argv.buildId, argv.lkgCIBuild, argv.clientType, argv.pipelineId, argv.pipelineName);
       },
     )
     .demandCommand().argv;
