@@ -21,7 +21,7 @@ storiesOf('ActivityItem', module)
     () => (
       <ActivityItem
         activityIcon={<Icon iconName="Message" />}
-        activityDescription={<span>description text</span>}
+        activityDescription={<span>description txet</span>}
         comments={<span>comment text</span>}
         timeStamp="timeStamp text"
       />
@@ -38,7 +38,7 @@ storiesOf('ActivityItem', module)
           { imageInitials: 'EF' },
           { imageInitials: 'GH' },
         ]}
-        activityDescription={<span>descriptionDDD text</span>}
+        activityDescription={<span>description text</span>}
         comments={<span>comment text</span>}
         timeStamp="timeStamp text"
       />
