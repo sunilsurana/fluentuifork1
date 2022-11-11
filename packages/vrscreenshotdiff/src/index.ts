@@ -25,14 +25,14 @@ const screenshotDiffCli = async () => {
       alias: 'pi',
       normalize: true,
       type: 'string',
-      demandOption: true,
+      demandOption: false,
     })
     .option('pipelineName', {
       description: 'Pipeline name ',
       alias: 'pn',
       normalize: true,
       type: 'string',
-      demandOption: true,
+      demandOption: false,
     })
     .option('lkgCIBuild', {
       description: 'Last green CI build ID',
