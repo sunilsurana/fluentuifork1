@@ -42,7 +42,7 @@ jobs:
               "blockingPipeline":{
               },
               "nonBlockingPipeline":{
-                "$(pipelineid)": {
+                "$(pipelineId)": {
                   "pipelineStatus": "PENDING",
                   "pipelineName": "$(pipelineName)"
                 }
@@ -114,7 +114,7 @@ jobs:
               "blockingPipeline":{
               },
               "nonBlockingPipeline":{
-                "$(pipelineid)": {
+                "$(pipelineId)": {
                   "pipelineStatus": "PENDING",
                   "pipelineName": "$(pipelineName)"
                 }
