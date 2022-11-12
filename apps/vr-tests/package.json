@@ -13,11 +13,12 @@
     "lint": "just-scripts lint",
     "screener:build": "cross-env NODE_OPTIONS=--max-old-space-size=3072 just-scripts storybook:build",
     "screener": "just-scripts screener",
-    "start": "just-scripts dev:storybook"
+    "start": "just-scripts dev:storybook",
+    "type-check": "tsc"
   },
   "devDependencies": {
     "@fluentui/eslint-plugin": "*",
-    "storywright": "0.0.23-beta.6"
+    "storywright": "0.0.24"
   },
   "dependencies": {
     "@fluentui/example-data": "^8.4.3",
