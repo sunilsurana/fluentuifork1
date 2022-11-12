@@ -36,8 +36,10 @@ steps:
     displayName: 'Run VR tests'
 
   - script: |
+      mkdir -p screenshots1
       mkdir -p screenshots
-      cp -rf ${{ parameters.storyPackagePath }}/dist/screenshots/*.png screenshots/
+      cp -rf ${{ parameters.storyPackagePath }}/dist/screenshots/*.png screenshots1/
+      zip screenshots/aa.zip screenshots1/*.png
     displayName: Collate Artifacts
 
   - task: PublishBuildArtifacts@1
