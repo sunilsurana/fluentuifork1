@@ -19,7 +19,7 @@
   "devDependencies": {
     "@fluentui/eslint-plugin": "*",
     "@fluentui/scripts": "^1.0.0",
-    "storywright": "0.0.24"
+    "storywright": "0.0.25"
   },
   "dependencies": {
     "@fluentui/react-accordion": "^9.0.11",
