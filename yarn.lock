@@ -24472,10 +24472,10 @@ storybook-addon-performance@0.16.1:
     tiny-invariant "^1.1.0"
     xstate "^4.22.0"
 
-storywright@0.0.26:
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/storywright/-/storywright-0.0.26.tgz#38e71fcb24c6b05e4928ef9951e72e325c5246f6"
-  integrity sha512-KqEAEkFabthffrI5DpnKuS/y07984bX0PiRqgAYRnSkeAOy82b+7HG3xmi/C+wJz97X+w0yh0B+sXAvh6Yi5MQ==
+storywright@0.0.26-beta.1:
+  version "0.0.26-beta.1"
+  resolved "https://registry.yarnpkg.com/storywright/-/storywright-0.0.26-beta.1.tgz#2ded8936ae7f9495a85efa8a206660fef69298a4"
+  integrity sha512-zNWRzTl8rOSDBFrbvozOcOshvLJPJzcSpm8sfZD6My24lsNK1xXsXDAykWZ7hh9y2XRtlXBL0Rewx82OoVKCXA==
   dependencies:
     playwright "^1.27.0"
     prop-types "^15.6.0"
