@@ -28,6 +28,7 @@ steps:
 
   - script: |
       isPR=${{ eq($(Build.Reason), 'PullRequest') }}
+      echo $isPR
       echo "Is PR build? ${isPR}"
       packageAffected=$(yarn --silent check:affected-package --packages @fluentui/vr-tests --pr=$isPR
       if [[ $packageAffected == false ]]; then
