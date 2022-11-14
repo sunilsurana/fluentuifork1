@@ -27,7 +27,6 @@ steps:
     displayName: yarn (install packages)
 
   - script: |
-      echo "Is PR build? ${{startsWith(github.ref, 'refs/pull/')}}"
       packageAffected=$(yarn --silent check:affected-package --packages @fluentui/vr-tests --pr=true
       if [[ $packageAffected == false ]]; then
         echo "Should skip screener"
