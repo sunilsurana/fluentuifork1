@@ -39,25 +39,25 @@ steps:
     displayName: Should
 
   - script: |
-      yarn workspace ${{ parameters.storyPackageName }} convert
+      yarn workspace ${{ parameters.vrTestPackageName }} convert
     displayName: Convert screener component to storywright
 
-  - ${{ if eq(parameters.shouldbuildstorybookaddon, 'true') }}:
+  - ${{ if eq(parameters.shouldBuildstorybookaddon, 'true') }}:
       - script: |
           yarn build --to @fluentui/react-storybook-addon
         displayName: Build react-storybook-addon
 
   - script: |
-      yarn workspace ${{ parameters.storyPackageName }} screener:build
+      yarn workspace ${{ parameters.vrTestPackageName }} screener:build
     displayName: Build VR tests components package
 
   - script: |
-      yarn workspace ${{ parameters.storyPackageName }} test:component --verbose
+      yarn workspace ${{ parameters.vrTestPackageName }} test:component --verbose
     displayName: 'Run VR tests'
 
   - script: |
       mkdir -p screenshots
-      cp -rf ${{ parameters.storyPackagePath }}/dist/screenshots/*.png screenshots/
+      cp -rf ${{ parameters.vrTestPackagePath }}/dist/screenshots/*.png screenshots/
     displayName: Collate Artifacts
 
   - task: PublishBuildArtifacts@1
