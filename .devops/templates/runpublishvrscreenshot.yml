@@ -27,8 +27,9 @@ steps:
     displayName: yarn (install packages)
 
   - script: |
-      echo "Is PR build? ${{ eq($(Build.Reason), 'PullRequest') }}"
-      packageAffected=$(yarn --silent check:affected-package --packages @fluentui/vr-tests --pr=${{ eq($(Build.Reason), 'PullRequest')} }
+      isPR=${{ eq($(Build.Reason), 'PullRequest') }}
+      echo "Is PR build? ${isPR}"
+      packageAffected=$(yarn --silent check:affected-package --packages @fluentui/vr-tests --pr=$isPR
       if [[ $packageAffected == false ]]; then
         echo "Should skip screener"
       else
