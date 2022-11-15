@@ -18,8 +18,9 @@ steps:
       echo $(Build.Reason)
       echo SOURCE BRANCH
       echo $(Build.SourceBranch)
-      isPR=${{eq(variables['Build.Reason'], 'PullRequest')}}
 
+      isPR=${{eq(variables['Build.Reason'], 'PullRequest')}}
+      echo $isPR
     displayName: yarn (install packages)
 
   - task: Bash@3
