@@ -30,8 +30,7 @@ steps:
     displayName: yarn (install packages)
 
   - script: |
-      isPR=${eq(variables['Build.Reason'], 'PullRequest')}
-
+      isPR=${{eq(variables['Build.Reason'], 'PullRequest')}}
     displayName: Should
 
   - script: |
