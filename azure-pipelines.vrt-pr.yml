@@ -57,7 +57,7 @@ jobs:
         env:
           VR_APPROVAL_CLIENT_SECRET: $(VR-APPROVAL-CLIENT-SECRET)
 
-      - template: .devops/templates/run-publish-vr-screenshot.yml
+      - template: .devops/templates/runpublishvrscreenshot.yml
         parameters:
           fluentVersion: v9
           vrTestPackageName: '@fluentui/vr-tests-react-components'
@@ -134,7 +134,7 @@ jobs:
         env:
           VR_APPROVAL_CLIENT_SECRET: $(VR-APPROVAL-CLIENT-SECRET)
 
-      - template: .devops/templates/run-publish-vr-screenshot.yml
+      - template: .devops/templates/runpublishvrscreenshot.yml
         parameters:
           fluentVersion: v8
           vrTestPackageName: '@fluentui/vr-tests'
