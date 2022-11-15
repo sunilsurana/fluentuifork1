@@ -76,7 +76,7 @@ jobs:
         env:
           SYSTEM_ACCESSTOKEN: $(System.AccessToken)
           BASELINE_PIPELINE_ID: $(BASELINE-PIPELINE-ID)
-        condition: eq(variables['vrTestSkip'], 'no'))
+        condition: eq(variables['vrTestSkip'], 'no')
 
       - bash: node node_modules/vrscreenshotdiff/lib/index.js pr --clientType "fluentuiv9" --buildId $(Build.BuildId) --lkgCIBuild $(LatestBuildId) --pipelineId $(pipelineId) --pipelineName '$(pipelineName)'
         displayName: 'Run fluentui-screenshotdiff'
@@ -91,7 +91,7 @@ jobs:
           STORAGE_KEY_FLUENTUI: $(STORAGE-KEY-BLOB-FLUENTUI)
           BLOB_CONNECTION_STRING: $(BLOB-CONNECTION-STRING)
           VR_APPROVAL_CLIENT_SECRET: $(VR-APPROVAL-CLIENT-SECRET)
-        condition: eq(variables['vrTestSkip'], 'no'))
+        condition: eq(variables['vrTestSkip'], 'no')
 
   - job: VisualRegressionTest_V8
     variables:
@@ -153,7 +153,7 @@ jobs:
         env:
           SYSTEM_ACCESSTOKEN: $(System.AccessToken)
           BASELINE_PIPELINE_ID: $(BASELINE-PIPELINE-ID)
-        condition: eq(variables['vrTestSkip'], 'no'))
+        condition: eq(variables['vrTestSkip'], 'no')
 
       - bash: node node_modules/vrscreenshotdiff/lib/index.js pr --clientType "fluentuiv8" --buildId $(Build.BuildId) --lkgCIBuild $(LatestBuildId) --pipelineId $(pipelineId) --pipelineName '$(pipelineName)'
         displayName: 'Run fluentui-screenshotdiff'
@@ -168,4 +168,4 @@ jobs:
           STORAGE_KEY_FLUENTUI: $(STORAGE-KEY-BLOB-FLUENTUI)
           BLOB_CONNECTION_STRING: $(BLOB-CONNECTION-STRING)
           VR_APPROVAL_CLIENT_SECRET: $(VR-APPROVAL-CLIENT-SECRET)
-        condition: eq(variables['vrTestSkip'], 'no'))
+        condition: eq(variables['vrTestSkip'], 'no')

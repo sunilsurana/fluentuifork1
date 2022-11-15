@@ -32,33 +32,33 @@ steps:
   - script: |
       yarn workspace ${{ parameters.vrTestPackageName }} convert
     displayName: Convert screener component to storywright
-    condition: eq(variables['vrTestSkip'], 'no'))
+    condition: eq(variables['vrTestSkip'], 'no')
 
   - ${{ if eq(parameters.shouldBuildstorybookaddon, 'true') }}:
       - script: |
           yarn build --to @fluentui/react-storybook-addon
         displayName: Build react-storybook-addon
-        condition: eq(variables['vrTestSkip'], 'no'))
+        condition: eq(variables['vrTestSkip'], 'no')
 
   - script: |
       yarn workspace ${{ parameters.vrTestPackageName }} screener:build
     displayName: Build VR tests components package
-    condition: eq(variables['vrTestSkip'], 'no'))
+    condition: eq(variables['vrTestSkip'], 'no')
 
   - script: |
       yarn workspace ${{ parameters.vrTestPackageName }} test:component --verbose
     displayName: 'Run VR tests'
-    condition: eq(variables['vrTestSkip'], 'no'))
+    condition: eq(variables['vrTestSkip'], 'no')
 
   - script: |
       mkdir -p screenshots
       cp -rf ${{ parameters.vrTestPackagePath }}/dist/screenshots/*.png screenshots/
     displayName: Collate Artifacts
-    condition: eq(variables['vrTestSkip'], 'no'))
+    condition: eq(variables['vrTestSkip'], 'no')
 
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: 'screenshots'
       ArtifactName: 'vrscreenshot${{ parameters.fluentVersion }}'
       publishLocation: 'Container'
-    condition: eq(variables['vrTestSkip'], 'no'))
+    condition: eq(variables['vrTestSkip'], 'no')
