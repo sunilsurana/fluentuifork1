@@ -13,31 +13,24 @@ parameters:
     default: false
 
 steps:
-  - script: |
-      echo REASON
-      echo $(Build.Reason)
-      echo SOURCE BRANCH
-      echo $(Build.SourceBranch)
-
-      isPR=${{lower(eq(variables['Build.Reason'], 'PullRequest'))}}
-      echo "Is PR build? $isPR"
-      echo $isPR
-    displayName: yarn (install packages)
-
   - task: Bash@3
     inputs:
       filePath: yarn-ci.sh
     displayName: yarn (install packages)
 
   - script: |
+      ## This is needed as check:affected-package compares against master branch
       git fetch origin master:master --depth 500
       isPR=${{eq(variables['Build.Reason'], 'PullRequest')}}
       packageAffected=$(yarn --silent check:affected-package --packages @fluentui/vr-tests-react-components --pr=${{lower(eq(variables['Build.Reason'], 'PullRequest'))}})
+      echo DDD
       echo $packageAffected
       if [[ $packageAffected == false ]]; then
-        echo "Should skip screener"
+        echo "Should skip vrTest"
+        echo "##vso[task.setvariable variable=vrTest;]yes"
       else
-        echo "Should NOT skip screener"
+        echo "Should NOT skip vrTest"
+        echo "##vso[task.setvariable variable=vrTest;]no"
       fi
     displayName: Should
 
