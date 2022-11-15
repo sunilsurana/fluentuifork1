@@ -19,7 +19,7 @@ steps:
       echo SOURCE BRANCH
       echo $(Build.SourceBranch)
 
-      isPR=${{eq(variables['Build.Reason'], 'PullRequest')}}
+      isPR=${{lower(eq(variables['Build.Reason'], 'PullRequest'))}}
       echo "Is PR build? $isPR"
       echo $isPR
     displayName: yarn (install packages)
@@ -31,7 +31,7 @@ steps:
 
   - script: |
       isPR=${{eq(variables['Build.Reason'], 'PullRequest')}}
-      packageAffected=$(yarn --silent check:affected-package --packages @fluentui/vr-tests-react-components --pr=${{eq(variables['Build.Reason'], 'PullRequest')}})
+      packageAffected=$(yarn --silent check:affected-package --packages @fluentui/vr-tests-react-components --pr=${{lower(eq(variables['Build.Reason'], 'PullRequest'))}})
       echo $packageAffected
       if [[ $packageAffected == false ]]; then
         echo "Should skip screener"
