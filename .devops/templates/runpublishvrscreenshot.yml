@@ -19,7 +19,7 @@ steps:
     displayName: yarn (install packages)
 
   - script: |
-      packageAffected=$(yarn --silent check:affected-package --packages @fluentui/vr-tests-react-components --pr=${{lower(eq(variables['Build.Reason'], 'PullRequest'))}})
+      packageAffected=$(yarn --silent check:affected-package --packages ${{ parameters.vrTestPackageName }} --pr=${{lower(eq(variables['Build.Reason'], 'PullRequest'))}})
       if [[ $packageAffected == false ]]; then
         echo "Should skip vrTest"
         echo "##vso[task.setvariable variable=vrTestSkip;]yes"
