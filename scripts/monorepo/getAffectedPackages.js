@@ -18,6 +18,7 @@ function getAffectedPackages(since = 'origin/master') {
 
   // Lage uses npmlog which defaults all output to stderr
   const output = res.stderr.toString().replace(/\b(info)\b/g, '');
+  console.log(output);
   // Lage uses npmlog which defaults all output to stderr
   const info = JSON.parse(output);
   if (!info.scope || !Array.isArray(info.scope)) {
