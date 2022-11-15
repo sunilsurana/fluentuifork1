@@ -22,7 +22,7 @@ const isPackageAffected = () => {
   const { packages, pr } = args;
 
   let affectedPackages = new Set();
-
+  console.log(pr);
   if (pr) {
     affectedPackages = getAffectedPackages();
   } else {
