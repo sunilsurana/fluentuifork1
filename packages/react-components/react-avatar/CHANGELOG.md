@@ -6,10 +6,10 @@ This log was last generated on Fri, 11 Nov 2022 14:57:52 GMT and should not be m
 
 ## [9.2.6](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.2.6)
 
-Fri, 11 Nov 2022 14:57:52 GMT 
+Fri, 11 Nov 2022 14:57:52 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.2.5..@fluentui/react-avatar_v9.2.6)
 
-### Patches
+### Patches1
 
 - chore: Replacing use of hard-coded constants with curve and duration tokens from theme. ([PR #25522](https://github.com/microsoft/fluentui/pull/25522) by humberto_makoto@hotmail.com)
 - fix: Update Avatar active ring color to match base color ([PR #25497](https://github.com/microsoft/fluentui/pull/25497) by behowell@microsoft.com)
@@ -28,7 +28,7 @@ Fri, 11 Nov 2022 14:57:52 GMT
 
 ## [9.2.5](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.2.5)
 
-Wed, 02 Nov 2022 11:57:47 GMT 
+Wed, 02 Nov 2022 11:57:47 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.2.4..@fluentui/react-avatar_v9.2.5)
 
 ### Patches
@@ -46,7 +46,7 @@ Wed, 02 Nov 2022 11:57:47 GMT
 
 ## [9.2.4](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.2.4)
 
-Tue, 25 Oct 2022 00:35:28 GMT 
+Tue, 25 Oct 2022 00:35:28 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.2.3..@fluentui/react-avatar_v9.2.4)
 
 ### Patches
@@ -56,7 +56,7 @@ Tue, 25 Oct 2022 00:35:28 GMT
 
 ## [9.2.3](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.2.3)
 
-Thu, 20 Oct 2022 08:39:58 GMT 
+Thu, 20 Oct 2022 08:39:58 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.2.2..@fluentui/react-avatar_v9.2.3)
 
 ### Patches
@@ -75,7 +75,7 @@ Thu, 20 Oct 2022 08:39:58 GMT
 
 ## [9.2.2](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.2.2)
 
-Thu, 13 Oct 2022 12:56:30 GMT 
+Thu, 13 Oct 2022 12:56:30 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.2.1..@fluentui/react-avatar_v9.2.2)
 
 ### Patches
@@ -84,7 +84,7 @@ Thu, 13 Oct 2022 12:56:30 GMT
 
 ## [9.2.1](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.2.1)
 
-Thu, 13 Oct 2022 11:02:43 GMT 
+Thu, 13 Oct 2022 11:02:43 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.2.0..@fluentui/react-avatar_v9.2.1)
 
 ### Patches
@@ -100,7 +100,7 @@ Thu, 13 Oct 2022 11:02:43 GMT
 
 ## [9.2.0](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.2.0)
 
-Mon, 03 Oct 2022 22:24:34 GMT 
+Mon, 03 Oct 2022 22:24:34 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.1.1..@fluentui/react-avatar_v9.2.0)
 
 ### Minor changes
@@ -118,7 +118,7 @@ Mon, 03 Oct 2022 22:24:34 GMT
 
 ## [9.1.1](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.1.1)
 
-Tue, 20 Sep 2022 20:55:45 GMT 
+Tue, 20 Sep 2022 20:55:45 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.1.0..@fluentui/react-avatar_v9.1.1)
 
 ### Patches
@@ -130,7 +130,7 @@ Tue, 20 Sep 2022 20:55:45 GMT
 
 ## [9.1.0](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.1.0)
 
-Thu, 15 Sep 2022 09:49:49 GMT 
+Thu, 15 Sep 2022 09:49:49 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.0.4..@fluentui/react-avatar_v9.1.0)
 
 ### Minor changes
@@ -163,7 +163,7 @@ Thu, 15 Sep 2022 09:49:49 GMT
 
 ## [9.0.4](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.0.4)
 
-Wed, 03 Aug 2022 16:03:37 GMT 
+Wed, 03 Aug 2022 16:03:37 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.0.3..@fluentui/react-avatar_v9.0.4)
 
 ### Patches
@@ -178,7 +178,7 @@ Wed, 03 Aug 2022 16:03:37 GMT
 
 ## [9.0.3](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.0.3)
 
-Thu, 14 Jul 2022 21:21:08 GMT 
+Thu, 14 Jul 2022 21:21:08 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.0.2..@fluentui/react-avatar_v9.0.3)
 
 ### Patches
@@ -193,7 +193,7 @@ Thu, 14 Jul 2022 21:21:08 GMT
 
 ## [9.0.2](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.0.2)
 
-Thu, 14 Jul 2022 17:06:13 GMT 
+Thu, 14 Jul 2022 17:06:13 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.0.1..@fluentui/react-avatar_v9.0.2)
 
 ### Patches
@@ -211,7 +211,7 @@ Thu, 14 Jul 2022 17:06:13 GMT
 
 ## [9.0.1](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.0.1)
 
-Tue, 28 Jun 2022 17:39:46 GMT 
+Tue, 28 Jun 2022 17:39:46 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.0.0..@fluentui/react-avatar_v9.0.1)
 
 ### Patches
@@ -225,7 +225,7 @@ Tue, 28 Jun 2022 17:39:46 GMT
 
 ## [9.0.0](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.0.0)
 
-Tue, 28 Jun 2022 15:14:14 GMT 
+Tue, 28 Jun 2022 15:14:14 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.0.0-rc.13..@fluentui/react-avatar_v9.0.0)
 
 ### Patches
@@ -259,7 +259,7 @@ Tue, 28 Jun 2022 15:14:14 GMT
 
 ## [9.0.0-rc.13](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.0.0-rc.13)
 
-Thu, 23 Jun 2022 14:25:31 GMT 
+Thu, 23 Jun 2022 14:25:31 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.0.0-rc.12..@fluentui/react-avatar_v9.0.0-rc.13)
 
 ### Changes
@@ -273,7 +273,7 @@ Thu, 23 Jun 2022 14:25:31 GMT
 
 ## [9.0.0-rc.12](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.0.0-rc.12)
 
-Tue, 31 May 2022 21:28:35 GMT 
+Tue, 31 May 2022 21:28:35 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.0.0-rc.11..@fluentui/react-avatar_v9.0.0-rc.12)
 
 ### Changes
@@ -292,7 +292,7 @@ Tue, 31 May 2022 21:28:35 GMT
 
 ## [9.0.0-rc.11](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.0.0-rc.11)
 
-Thu, 26 May 2022 21:01:22 GMT 
+Thu, 26 May 2022 21:01:22 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.0.0-rc.10..@fluentui/react-avatar_v9.0.0-rc.11)
 
 ### Changes
@@ -305,7 +305,7 @@ Thu, 26 May 2022 21:01:22 GMT
 
 ## [9.0.0-rc.10](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.0.0-rc.10)
 
-Mon, 23 May 2022 18:56:40 GMT 
+Mon, 23 May 2022 18:56:40 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.0.0-rc.9..@fluentui/react-avatar_v9.0.0-rc.10)
 
 ### Changes
@@ -322,7 +322,7 @@ Mon, 23 May 2022 18:56:40 GMT
 
 ## [9.0.0-rc.9](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.0.0-rc.9)
 
-Mon, 23 May 2022 12:14:00 GMT 
+Mon, 23 May 2022 12:14:00 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.0.0-rc.8..@fluentui/react-avatar_v9.0.0-rc.9)
 
 ### Changes
@@ -342,7 +342,7 @@ Mon, 23 May 2022 12:14:00 GMT
 
 ## [9.0.0-rc.8](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.0.0-rc.8)
 
-Thu, 05 May 2022 18:26:29 GMT 
+Thu, 05 May 2022 18:26:29 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.0.0-rc.7..@fluentui/react-avatar_v9.0.0-rc.8)
 
 ### Changes
@@ -359,7 +359,7 @@ Thu, 05 May 2022 18:26:29 GMT
 
 ## [9.0.0-rc.7](https://github.com/microsoft/fluentui/tree/@fluentui/react-avatar_v9.0.0-rc.7)
 
-Wed, 04 May 2022 13:26:37 GMT 
+Wed, 04 May 2022 13:26:37 GMT
 [Compare changes](https://github.com/microsoft/fluentui/compare/@fluentui/react-avatar_v9.0.0-rc.6..@fluentui/react-avatar_v9.0.0-rc.7)
 
 ### Changes
