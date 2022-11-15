@@ -19,6 +19,9 @@ jobs:
     workspace:
       clean: all
     steps:
+      - checkout: self
+        fetchDepth: 0
+
       - template: .devops/templates/tools.yml
 
       - template: .devops/templates/runpublishvrscreenshot.yml
