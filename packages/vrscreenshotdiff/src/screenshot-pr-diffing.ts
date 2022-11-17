@@ -20,8 +20,8 @@ import { getProject } from './azure-builddata/getProject';
 
 const organization = 'uifabric';
 const project = getProject();
-const owner = 'sunilsurana';
-const repo = 'fluentuifork1';
+const ghRepoOwner = process.env['GITHUB_REPO_OWNER'];
+const ghRepoName = process.env['GITHUB_REPO_NAME'];
 
 const diffResultContainer = 'diff-screenshots';
 const candidateContainer = 'candidate-screenshots';
@@ -221,8 +221,8 @@ export async function runScreenshotDiffing(
     prCommentData = prCommentData + '<div id="vrtComment' + clientType + '"/>';
 
     const commentList = await octokit.rest.issues.listComments({
-      owner: owner,
-      repo: repo,
+      owner: ghRepoOwner,
+      repo: ghRepoName,
       issue_number: prNumber,
     });
 
@@ -237,15 +237,15 @@ export async function runScreenshotDiffing(
 
     if (issueId === -1) {
       await octokit.rest.issues.createComment({
-        owner: owner,
-        repo: repo,
+        owner: ghRepoOwner,
+        repo: ghRepoName,
         issue_number: prNumber,
         body: prCommentData,
       });
     } else {
       await octokit.rest.issues.updateComment({
-        owner: owner,
-        repo: repo,
+        owner: ghRepoOwner,
+        repo: ghRepoName,
         comment_id: issueId,
         body: prCommentData,
       });
