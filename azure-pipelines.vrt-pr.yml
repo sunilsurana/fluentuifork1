@@ -56,6 +56,7 @@ jobs:
         displayName: 'Call policy State Api'
         env:
           VR_APPROVAL_CLIENT_SECRET: $(VR-APPROVAL-CLIENT-SECRET)
+          VR_APPROVAL_HOST: $(VR_APPROVAL_HOST)
 
       - template: .devops/templates/runpublishvrscreenshot.yml
         parameters:
@@ -82,7 +83,7 @@ jobs:
         displayName: 'Run fluentui-screenshotdiff'
         env:
           API_URL: $(System.CollectionUri)
-          API_TOKEN: $(fabric-public-pipeline-access-PAT)
+          API_TOKEN: $(API_TOKEN)
           API_REPOSITORY: $(Build.Repository.Name)
           API_PROJECT: $(System.TeamProject)
           SCREENSHOT_ARTIFACT_FOLDER: vrscreenshotv9
@@ -91,8 +92,9 @@ jobs:
           STORAGE_KEY_FLUENTUI: $(STORAGE-KEY-BLOB-FLUENTUI)
           BLOB_CONNECTION_STRING: $(BLOB-CONNECTION-STRING)
           VR_APPROVAL_CLIENT_SECRET: $(VR-APPROVAL-CLIENT-SECRET)
-          GITHUB_REPO_OWNER: 'microsoft'
-          GITHUB_REPO_NAME: 'fluentui'
+          GITHUB_REPO_OWNER: 'sunilsurana'
+          GITHUB_REPO_NAME: 'fluentuifork1'
+          VR_APPROVAL_HOST: $(VR_APPROVAL_HOST)
         condition: eq(variables['vrTestSkip'], 'no')
 
   - job: VisualRegressionTest_V8
@@ -135,6 +137,7 @@ jobs:
         displayName: 'Call policy State Api'
         env:
           VR_APPROVAL_CLIENT_SECRET: $(VR-APPROVAL-CLIENT-SECRET)
+          VR_APPROVAL_HOST: $(VR_APPROVAL_HOST)
 
       - template: .devops/templates/runpublishvrscreenshot.yml
         parameters:
@@ -161,7 +164,7 @@ jobs:
         displayName: 'Run fluentui-screenshotdiff'
         env:
           API_URL: $(System.CollectionUri)
-          API_TOKEN: $(fabric-public-pipeline-access-PAT)
+          API_TOKEN: $(API_TOKEN)
           API_REPOSITORY: $(Build.Repository.Name)
           API_PROJECT: $(System.TeamProject)
           SCREENSHOT_ARTIFACT_FOLDER: vrscreenshotv8
@@ -170,6 +173,7 @@ jobs:
           STORAGE_KEY_FLUENTUI: $(STORAGE-KEY-BLOB-FLUENTUI)
           BLOB_CONNECTION_STRING: $(BLOB-CONNECTION-STRING)
           VR_APPROVAL_CLIENT_SECRET: $(VR-APPROVAL-CLIENT-SECRET)
-          GITHUB_REPO_OWNER: 'microsoft'
-          GITHUB_REPO_NAME: 'fluentui'
+          GITHUB_REPO_OWNER: 'sunilsurana'
+          GITHUB_REPO_NAME: 'fluentuifork1'
+          VR_APPROVAL_HOST: $(VR_APPROVAL_HOST)
         condition: eq(variables['vrTestSkip'], 'no')
