@@ -3,7 +3,7 @@ import { getEnv } from './getEnv';
 import axios from 'axios';
 import { isNullOrUndefined } from 'util';
 
-const vrApprovalHost = 'https://vrt-fluentapp.azurewebsites.net/api/';
+const vrApprovalHost = getEnv('VR_APPROVAL_HOST');
 
 type TestRunResult = {
   readonly imageName: string;
