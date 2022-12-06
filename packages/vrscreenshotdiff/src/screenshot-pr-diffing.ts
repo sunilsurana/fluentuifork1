@@ -22,7 +22,7 @@ const organization = 'uifabric';
 const project = getProject();
 const ghRepoOwner = process.env['GITHUB_REPO_OWNER'];
 const ghRepoName = process.env['GITHUB_REPO_NAME'];
-
+const vrAppName = process.env['VR_APP_NAME'];
 const diffResultContainer = 'diff-screenshots';
 const candidateContainer = 'candidate-screenshots';
 const baselineContainer = 'baseline-screenshots';
@@ -216,6 +216,7 @@ export async function runScreenshotDiffing(
       prNumber,
       commitId,
       clientType,
+      vrAppName
     );
 
     prCommentData = prCommentData + '<div id="vrtComment' + clientType + '"/>';

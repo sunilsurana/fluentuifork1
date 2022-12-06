@@ -28,6 +28,7 @@ export function createScreenshotDiffingContent(
   prId: number,
   commitId: string,
   clientType1: string,
+  vrappname: string
 ): string {
   if (
     (diffJsonResult.screenshotsChanged && diffJsonResult.screenshotsChanged.length > 0) ||
