@@ -315,11 +315,11 @@ export async function getArtifactsFromBlobStorageAndWriteToLocalFolderNew({
 
   const containerClient = blobService.getContainerClient(container);
 
-  await createFolderInApp(localFolderPath + '/vrscreenshot' + suffix);
+  await createFolderInApp(localFolderPath + '/' + suffix);
 
   console.log('local folder: ');
 
-  console.log('local folder: ' + localFolderPath);
+  console.log('local folder: ' + localFolderPath + '/' + suffix);
 
   console.log('local folder: ');
 

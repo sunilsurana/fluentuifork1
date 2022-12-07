@@ -95,8 +95,7 @@ export async function runScreenshotDiffing(
       blobUploadConfigCandidate,
     );
 
-    let folderSuffix = 'v9';
-    if (clientType === 'fluentuiv8') folderSuffix = 'v8';
+    let folderSuffix = buildArtifactFolder;
     await getArtifactsFromBlobStorageAndWriteToLocalFolderNew({
       localFolderPath: baselineFolder,
       container: baselineContainer,
