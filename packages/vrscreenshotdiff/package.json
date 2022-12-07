@@ -1,6 +1,6 @@
 {
   "name": "vrscreenshotdiff",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "screenshot diffing package",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -22,7 +22,7 @@
     "lodash": "^4.17.21",
     "unzipper": "^0.10.5",
     "adal-node": "^0.2.3",
-    "yargs": "13.3.2"
+    "yargs": "^13.3.0"
   },
   "author": "",
   "license": "ISC",
