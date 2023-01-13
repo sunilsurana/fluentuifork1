@@ -19,6 +19,13 @@ type DiffSectionData = {
   screenshotsChanged: Array<ImageDetails>;
 };
 
+export function didScreenShotChange(diffJsonResult: DiffResult): boolean
+{
+  return (diffJsonResult.screenshotsChanged && diffJsonResult.screenshotsChanged.length > 0) ||
+  (diffJsonResult.screenshotsAdded && diffJsonResult.screenshotsAdded.length > 0) ||
+  (diffJsonResult.screenshotsRemoved && diffJsonResult.screenshotsRemoved.length > 0);
+}
+
 export function createScreenshotDiffingContent(
   diffJsonResult: DiffResult,
   clientType: string,
@@ -30,11 +37,8 @@ export function createScreenshotDiffingContent(
   clientType1: string,
   vrappname: string
 ): string {
-  if (
-    (diffJsonResult.screenshotsChanged && diffJsonResult.screenshotsChanged.length > 0) ||
-    (diffJsonResult.screenshotsAdded && diffJsonResult.screenshotsAdded.length > 0) ||
-    (diffJsonResult.screenshotsRemoved && diffJsonResult.screenshotsRemoved.length > 0)
-  ) {
+  if (didScreenShotChange(diffJsonResult)) 
+  {
     const screenshotAffected =
       diffJsonResult.screenshotsAdded.length +
       diffJsonResult.screenshotsRemoved.length +

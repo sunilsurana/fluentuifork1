@@ -14,9 +14,10 @@ import {
   getArtifactsFromLocalFolderAndWriteToBlobStorage,
 } from './azure-storage/getArtifactsFromBlobStorageAndWriteToLocalFolder';
 import { join } from 'path';
-import { createScreenshotDiffingContent } from './screenshotReporter';
+import { createScreenshotDiffingContent, didScreenShotChange } from './screenshotReporter';
 import { updateScreenshotDiffData } from './vrApprovalAPIHelper';
 import { getProject } from './azure-builddata/getProject';
+import * as githelper from './githelper';
 
 const organization = 'uifabric';
 const project = getProject();
@@ -200,8 +201,8 @@ export async function runScreenshotDiffing(
     const uploadedReportFiles = await getArtifactsFromLocalFolderAndWriteToBlobStorage(diffUploadConfig);
     console.log(
       'Success: Writing ' +
-        // uploadedReportFiles.size +
-        ' file(s) from a folder and wrote to Azure   Blob',
+      // uploadedReportFiles.size +
+      ' file(s) from a folder and wrote to Azure   Blob',
     );
 
     //Posting PR comment
@@ -219,36 +220,46 @@ export async function runScreenshotDiffing(
     );
 
     prCommentData = prCommentData + '<div id="vrtComment' + clientType + '"/>';
-
-    const commentList = await octokit.rest.issues.listComments({
-      owner: ghRepoOwner,
-      repo: ghRepoName,
-      issue_number: prNumber,
-    });
-
-    const arrayComment = commentList.data;
-    let issueId = -1;
-
-    arrayComment.forEach(item => {
-      if (item.body.includes('vrtComment' + clientType)) {
-        issueId = item.id;
+    const commentStr = 'vrtComment' + clientType;
+    const gitPR = { owner: ghRepoOwner, repo: ghRepoName, prNumber: prNumber };
+    if (didScreenShotChange(diffResult)) {
+      // if issuecomment exist delete
+      const issueCommentId = await githelper.getIssueCommentId(gitPR, commentStr);
+      if (issueCommentId !== -1) {
+        console.log(`Deleting issue comment ${issueCommentId}`);
+        await githelper.deleteIssueComment(gitPR, issueCommentId);
       }
-    });
 
-    if (issueId === -1) {
-      await octokit.rest.issues.createComment({
-        owner: ghRepoOwner,
-        repo: ghRepoName,
-        issue_number: prNumber,
-        body: prCommentData,
-      });
-    } else {
-      await octokit.rest.issues.updateComment({
-        owner: ghRepoOwner,
-        repo: ghRepoName,
-        comment_id: issueId,
-        body: prCommentData,
-      });
+      const reviewCommentId = await githelper.getReviewCommentId(gitPR, commentStr);
+
+      // if reviewcomment exist update
+      if (reviewCommentId !== -1) {
+        console.log(`Updating review comment ${reviewCommentId}`);
+        await githelper.updateReviewComment(gitPR, reviewCommentId, prCommentData);
+      }
+      else {
+        console.log(`Creating review comment`);
+        await githelper.createReviewComment(gitPR, prCommentData);
+      }
+    }
+    else {
+      // if ReviewCommentExist delete
+      const reviewCommentId = await githelper.getReviewCommentId(gitPR, commentStr);
+      if (reviewCommentId !== -1) {
+        console.log(`Deleting review comment ${reviewCommentId}`);
+        await githelper.deleteReviewComment(gitPR, reviewCommentId);
+      }
+
+      const issueCommentId = await githelper.getIssueCommentId(gitPR, commentStr);
+      if (issueCommentId !== -1) {
+        console.log(`Updating issue comment ${issueCommentId}`);
+        await githelper.updateIssueComment(gitPR, issueCommentId, prCommentData);
+      }
+      else {
+        console.log(`Creating issue comment`);
+        await githelper.createIssueComment(gitPR, prCommentData);
+      }
+
     }
 
     // updating diff data into  DB
